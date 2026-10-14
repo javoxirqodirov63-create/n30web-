@@ -803,13 +803,50 @@
               </div>
             </div>
 
-            <!-- Manzil yoki qisqa izoh -->
+            <!-- Qabul qilish turi (Yetkazib berish yoki O'zim olib ketaman) -->
             <div>
-              <label for="userAddress" class="block text-xs font-extrabold text-stone-700 uppercase tracking-wider mb-2">
-                Yetkazib berish manzili yoki qisqa izoh
+              <label class="block text-xs font-extrabold text-stone-700 uppercase tracking-wider mb-2">
+                Qabul qilish turi <span class="text-red-500">*</span>
+              </label>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <label id="deliveryCardCourier" class="cursor-pointer border-2 border-brand-500 bg-brand-50/70 p-3.5 rounded-2xl flex items-center gap-3 transition-all shadow-xs">
+                  <input type="radio" name="fulfillmentType" value="Yetkazib berish" checked onchange="handleFulfillmentChange(this.value)" class="text-brand-600 focus:ring-brand-500 h-4 w-4">
+                  <div>
+                    <div class="font-extrabold text-stone-900 text-xs sm:text-sm flex items-center gap-1.5">
+                      <i class="fa-solid fa-truck-fast text-brand-600"></i> Yetkazib berish
+                    </div>
+                    <span class="text-[11px] text-stone-500 block">Kuryer orqali manzilingizga</span>
+                  </div>
+                </label>
+                <label id="deliveryCardPickup" class="cursor-pointer border-2 border-stone-200 bg-stone-50 p-3.5 rounded-2xl flex items-center gap-3 transition-all hover:border-stone-300">
+                  <input type="radio" name="fulfillmentType" value="O'zim olib ketaman" onchange="handleFulfillmentChange(this.value)" class="text-brand-600 focus:ring-brand-500 h-4 w-4">
+                  <div>
+                    <div class="font-extrabold text-stone-900 text-xs sm:text-sm flex items-center gap-1.5">
+                      <i class="fa-solid fa-store text-amber-600"></i> O'zim olib ketaman
+                    </div>
+                    <span class="text-[11px] text-stone-500 block">Do'kon/omborxonadan</span>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <!-- Manzil yoki qisqa izoh -->
+            <div id="addressSectionWrapper">
+              <!-- Do'kondan olib ketish ma'lumot qutisi (faqat O'zim olib ketaman tanlanganda ko'rinadi) -->
+              <div id="pickupInfoBox" class="hidden mb-3 p-4 bg-amber-50 rounded-2xl border border-amber-200 text-xs text-amber-900 space-y-1">
+                <div class="flex items-center gap-2 font-bold text-amber-950">
+                  <i class="fa-solid fa-location-dot text-amber-600 text-sm"></i>
+                  <span>Do'konimiz / Omborxona manzili:</span>
+                </div>
+                <p class="text-stone-700 pl-5">Toshkent shahar, Chilonzor tumani, Bunyodkor shoh ko'chasi, 42-uy.</p>
+                <p class="text-[11px] text-amber-800 pl-5">Ish vaqti: Dushanba — Shanba: 08:30 dan 19:00 gacha.</p>
+              </div>
+
+              <label id="userAddressLabel" for="userAddress" class="block text-xs font-extrabold text-stone-700 uppercase tracking-wider mb-2">
+                Yetkazib berish manzili <span class="text-red-500">*</span>
               </label>
               <div class="relative">
-                <textarea id="userAddress" rows="3" placeholder="Shahar, tuman, ko'cha, uy raqami yoki buyurtma bo'yicha maxsus talablaringiz..." class="w-full p-4 rounded-2xl bg-stone-50 border border-stone-200 text-stone-900 font-medium focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all"></textarea>
+                <textarea id="userAddress" rows="3" required placeholder="Shahar, tuman, ko'cha, uy raqami va mo'ljal..." class="w-full p-4 rounded-2xl bg-stone-50 border border-stone-200 text-stone-900 font-medium focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all"></textarea>
               </div>
             </div>
 
@@ -1255,6 +1292,31 @@
       });
     });
 
+    // Handle fulfillment radio switch (Yetkazib berish vs O'zim olib ketaman)
+    function handleFulfillmentChange(type) {
+      const courierCard = document.getElementById('deliveryCardCourier');
+      const pickupCard = document.getElementById('deliveryCardPickup');
+      const pickupBox = document.getElementById('pickupInfoBox');
+      const addressLabel = document.getElementById('userAddressLabel');
+      const addressInput = document.getElementById('userAddress');
+
+      if (type === "Yetkazib berish") {
+        courierCard.className = "cursor-pointer border-2 border-brand-500 bg-brand-50/70 p-3.5 rounded-2xl flex items-center gap-3 transition-all shadow-xs";
+        pickupCard.className = "cursor-pointer border-2 border-stone-200 bg-stone-50 p-3.5 rounded-2xl flex items-center gap-3 transition-all hover:border-stone-300";
+        pickupBox.classList.add('hidden');
+        addressLabel.innerHTML = 'Yetkazib berish manzili <span class="text-red-500">*</span>';
+        addressInput.placeholder = "Shahar, tuman, ko'cha, uy raqami va mo'ljal...";
+        addressInput.required = true;
+      } else {
+        pickupCard.className = "cursor-pointer border-2 border-amber-500 bg-amber-50/70 p-3.5 rounded-2xl flex items-center gap-3 transition-all shadow-xs";
+        courierCard.className = "cursor-pointer border-2 border-stone-200 bg-stone-50 p-3.5 rounded-2xl flex items-center gap-3 transition-all hover:border-stone-300";
+        pickupBox.classList.remove('hidden');
+        addressLabel.innerHTML = 'Qo\'shimcha izoh yoki qachon olib ketasiz? <span class="text-stone-400 font-normal">(ixtiyoriy)</span>';
+        addressInput.placeholder = "Masalan: Ertaga soat 14:00 da o'zim borib olib ketaman...";
+        addressInput.required = false;
+      }
+    }
+
     // Order Form Submit Handler
     async function handleOrderSubmit(event) {
       event.preventDefault();
@@ -1268,6 +1330,7 @@
       const name = document.getElementById('userName').value.trim();
       const phone = document.getElementById('userPhone').value.trim();
       const address = document.getElementById('userAddress').value.trim() || "Kiritilmagan";
+      const fulfillment = document.querySelector('input[name="fulfillmentType"]:checked')?.value || "Yetkazib berish";
       const submitBtn = document.getElementById('submitBtn');
 
       submitBtn.disabled = true;
@@ -1283,8 +1346,9 @@
       const messageText = `🌾 YANGI BUYURTMA (Ozuqa-don)\n\n` +
                           `👤 Mijoz: ${name}\n` +
                           `📞 Tel: ${phone}\n` +
-                          `📍 Manzil/Izoh: ${address}\n\n` +
-                          `📦 BUYURTMA TARKIBI:\n${itemsText}\n\n` +
+                          `📦 Qabul qilish turi: ${fulfillment === "Yetkazib berish" ? "🚚 Yetkazib berish" : "🏬 O'zim olib ketaman (Do'kondan)"}\n` +
+                          `📍 Manzil / Izoh: ${address}\n\n` +
+                          `📋 BUYURTMA TARKIBI:\n${itemsText}\n\n` +
                           `💰 JAMI SUMMA: ${formatPrice(totalPrice)}\n` +
                           `⏰ Sana: ${new Date().toLocaleString('uz-UZ')}`;
 
@@ -1315,9 +1379,10 @@
       document.getElementById('modalOrderDetails').innerHTML = `
         <p><strong>Mijoz:</strong> ${name}</p>
         <p><strong>Telefon:</strong> ${phone}</p>
+        <p><strong>Qabul qilish turi:</strong> <span class="text-brand-700 font-bold">${fulfillment}</span></p>
         <p><strong>Mahsulotlar soni:</strong> ${cart.reduce((sum, i) => sum + i.quantity, 0)} ta</p>
         <p><strong>Jami to'lov:</strong> <span class="text-brand-700 font-bold">${formatPrice(totalPrice)}</span></p>
-        ${address !== "Kiritilmagan" ? `<p><strong>Manzil:</strong> ${address}</p>` : ''}
+        ${address !== "Kiritilmagan" ? `<p><strong>Manzil / Izoh:</strong> ${address}</p>` : ''}
       `;
 
       const modal = document.getElementById('successModal');
@@ -1326,6 +1391,7 @@
 
       // Reset form and cart
       document.getElementById('orderForm').reset();
+      handleFulfillmentChange("Yetkazib berish"); // Reset to default fulfillment
       cart = [];
       saveCart();
 
