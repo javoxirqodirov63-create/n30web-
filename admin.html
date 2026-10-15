@@ -176,6 +176,28 @@
 
       </div>
 
+      <!-- Telegram Bot Status Banner -->
+      <div id="tgStatusBanner" class="bg-gradient-to-r from-sky-50 via-blue-50 to-indigo-50 border border-sky-200/80 rounded-3xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 rounded-2xl bg-sky-500 text-white flex items-center justify-center text-2xl shadow-md shrink-0">
+            <i class="fa-brands fa-telegram"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <h3 class="font-black text-stone-900 text-sm">Telegram Bot Holati</h3>
+              <span id="tgBadge" class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-stone-200 text-stone-600">Tekshirilmoqda...</span>
+            </div>
+            <p id="tgDetailText" class="text-xs text-stone-600 mt-0.5">Bot va Chat ID sozlamalarini serverdan yuklash...</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <button onclick="testTelegramConnection()" id="btnTestTg" class="px-4 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-700 active:scale-95 text-white font-bold text-xs shadow-sm transition-all flex items-center gap-2">
+            <i class="fa-solid fa-paper-plane"></i>
+            <span>Sinov xabari yuborish</span>
+          </button>
+        </div>
+      </div>
+
       <!-- Navigation Tabs & Actions -->
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-stone-200 pb-4">
         
@@ -274,6 +296,62 @@
       document.getElementById('dashboardSection').classList.remove('hidden');
       loadOrders();
       renderProducts();
+      checkTelegramStatus();
+    }
+
+    // Determine API origin
+    const API_BASE = (window.location.protocol === 'http:' || window.location.protocol === 'https:') && window.location.port === '3000'
+      ? ''
+      : 'http://localhost:3000';
+
+    // Check Telegram Bot Status
+    async function checkTelegramStatus() {
+      const badge = document.getElementById('tgBadge');
+      const detail = document.getElementById('tgDetailText');
+      if (!badge || !detail) return;
+
+      try {
+        const res = await fetch(`${API_BASE}/api/telegram-status`);
+        const data = await res.json();
+
+        if (data.ok && data.bot) {
+          badge.className = "px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-green-100 text-green-700";
+          badge.textContent = "Ulangan va Faol";
+          detail.innerHTML = `Bot: <b>@${data.bot.username}</b> (${data.bot.first_name}) | Chat ID: <code>${data.configuredChatId}</code>`;
+        } else {
+          badge.className = "px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-amber-100 text-amber-700";
+          badge.textContent = "Ulanmagan";
+          detail.textContent = data.error || ".env faylida bot token yoki chat_id xato ko'rsatilgan.";
+        }
+      } catch (err) {
+        badge.className = "px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-red-100 text-red-700";
+        badge.textContent = "Server O'chiq";
+        detail.textContent = "Node.js serveri (localhost:3000) ishlamayapti yoki javob bermadi.";
+      }
+    }
+
+    // Test Telegram Bot Connection
+    async function testTelegramConnection() {
+      const btn = document.getElementById('btnTestTg');
+      const originalHtml = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>Yuborilmoqda...</span>';
+
+      try {
+        const res = await fetch(`${API_BASE}/api/test-telegram`, { method: 'POST' });
+        const data = await res.json();
+        if (data.ok) {
+          alert("✅ Sinov xabari Telegram botingizga muvaffaqiyatli yuborildi! Telegramni tekshiring.");
+        } else {
+          alert(`❌ Xatolik yuz berdi: ${data.error || 'Xabar yuborilmadi'}\n\nEslatma: Agar botga avval /start bosmagan bo'lsangiz, Telegramda botni ochib /start bosing!`);
+        }
+      } catch (err) {
+        alert("❌ Serverga ulanib bo'lmadi! Iltimos, terminalda 'node server.js' ishlab turganini tekshiring.");
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = originalHtml;
+        checkTelegramStatus();
+      }
     }
 
     // Toggle Password Visibility
