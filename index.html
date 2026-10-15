@@ -249,334 +249,9 @@
         </p>
       </div>
 
-      <!-- Products Grid (10 Products) -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-
-        <!-- 1. Kanareka Doni -->
-        <div class="product-card group bg-white rounded-3xl overflow-hidden border border-stone-200/80 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
-          <div>
-            <div class="relative h-52 overflow-hidden bg-stone-100">
-              <img src="images/kanareka-don.jpg" alt="Kanareka doni" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-              <span class="absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-bold bg-amber-500 text-white shadow-sm">
-                Premium
-              </span>
-            </div>
-            <div class="p-5 space-y-2">
-              <div class="flex items-center justify-between text-xs font-semibold text-stone-500">
-                <span>Kanareykalar uchun</span>
-                <span class="text-brand-700 bg-brand-50 px-2 py-0.5 rounded-md">1 kg</span>
-              </div>
-              <h3 class="font-extrabold text-stone-900 text-base group-hover:text-brand-600 transition-colors">
-                Kanareka uchun maxsus sayrash ozuqasi
-              </h3>
-              <p class="text-xs text-stone-500 line-clamp-2">
-                Kanarekalarning jarangdor sayrashini ta'minlovchi raps, tariq va sara urug'lar aralashmasi.
-              </p>
-            </div>
-          </div>
-          <div class="p-5 pt-0">
-            <div class="flex items-baseline justify-between mb-4 pt-2 border-t border-stone-100">
-              <span class="text-xs text-stone-400 font-medium">Narxi:</span>
-              <span class="text-xl font-black text-brand-700">26 000 <span class="text-xs font-semibold text-stone-500">so'm</span></span>
-            </div>
-            <button onclick="handleAddToCart(this, 'prod-1', 'Kanareka uchun maxsus sayrash ozuqasi', 26000, '1 kg', 'images/kanareka-don.jpg')" class="w-full py-3 rounded-xl bg-brand-600 hover:bg-brand-700 active:scale-95 text-white font-bold text-sm shadow-md shadow-brand-600/20 transition-all flex items-center justify-center gap-2">
-              <i class="fa-solid fa-cart-plus"></i>
-              <span>Savatchaga qo'shish</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- 2. Amadinka Doni -->
-        <div class="product-card group bg-white rounded-3xl overflow-hidden border border-stone-200/80 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
-          <div>
-            <div class="relative h-52 overflow-hidden bg-stone-100">
-              <img src="images/amadinka-don.jpg" alt="Amadinka doni" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-              <span class="absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-bold bg-brand-600 text-white shadow-sm">
-                Tozalangan
-              </span>
-            </div>
-            <div class="p-5 space-y-2">
-              <div class="flex items-center justify-between text-xs font-semibold text-stone-500">
-                <span>Amadinlar uchun</span>
-                <span class="text-brand-700 bg-brand-50 px-2 py-0.5 rounded-md">1 kg</span>
-              </div>
-              <h3 class="font-extrabold text-stone-900 text-base group-hover:text-brand-600 transition-colors">
-                Amadinka qushlari uchun elangan don
-              </h3>
-              <p class="text-xs text-stone-500 line-clamp-2">
-                Amadinlar va mayda qushlar uchun maxsus saralangan mayda tariq va vitaminli donlar.
-              </p>
-            </div>
-          </div>
-          <div class="p-5 pt-0">
-            <div class="flex items-baseline justify-between mb-4 pt-2 border-t border-stone-100">
-              <span class="text-xs text-stone-400 font-medium">Narxi:</span>
-              <span class="text-xl font-black text-brand-700">22 000 <span class="text-xs font-semibold text-stone-500">so'm</span></span>
-            </div>
-            <button onclick="handleAddToCart(this, 'prod-2', 'Amadinka qushlari uchun elangan don', 22000, '1 kg', 'images/amadinka-don.jpg')" class="w-full py-3 rounded-xl bg-brand-600 hover:bg-brand-700 active:scale-95 text-white font-bold text-sm shadow-md shadow-brand-600/20 transition-all flex items-center justify-center gap-2">
-              <i class="fa-solid fa-cart-plus"></i>
-              <span>Savatchaga qo'shish</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- 3. Kokil Doni -->
-        <div class="product-card group bg-white rounded-3xl overflow-hidden border border-stone-200/80 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
-          <div>
-            <div class="relative h-52 overflow-hidden bg-stone-100">
-              <img src="images/kokil-don.jpg" alt="Kokil doni" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-              <span class="absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-bold bg-amber-500 text-white shadow-sm">
-                Mevali
-              </span>
-            </div>
-            <div class="p-5 space-y-2">
-              <div class="flex items-center justify-between text-xs font-semibold text-stone-500">
-                <span>Kokil va To'tilar</span>
-                <span class="text-brand-700 bg-brand-50 px-2 py-0.5 rounded-md">1 kg</span>
-              </div>
-              <h3 class="font-extrabold text-stone-900 text-base group-hover:text-brand-600 transition-colors">
-                Kokil qushlari uchun mevali don aralashmasi
-              </h3>
-              <p class="text-xs text-stone-500 line-clamp-2">
-                Pista, yer yong'oq, suli va quritilgan mevalar bilan boyitilgan to'yimli kokil ozuqasi.
-              </p>
-            </div>
-          </div>
-          <div class="p-5 pt-0">
-            <div class="flex items-baseline justify-between mb-4 pt-2 border-t border-stone-100">
-              <span class="text-xs text-stone-400 font-medium">Narxi:</span>
-              <span class="text-xl font-black text-brand-700">34 000 <span class="text-xs font-semibold text-stone-500">so'm</span></span>
-            </div>
-            <button onclick="handleAddToCart(this, 'prod-3', 'Kokil qushlari uchun mevali don aralashmasi', 34000, '1 kg', 'images/kokil-don.jpg')" class="w-full py-3 rounded-xl bg-brand-600 hover:bg-brand-700 active:scale-95 text-white font-bold text-sm shadow-md shadow-brand-600/20 transition-all flex items-center justify-center gap-2">
-              <i class="fa-solid fa-cart-plus"></i>
-              <span>Savatchaga qo'shish</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- 4. Bedana Doni -->
-        <div class="product-card group bg-white rounded-3xl overflow-hidden border border-stone-200/80 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
-          <div>
-            <div class="relative h-52 overflow-hidden bg-stone-100">
-              <img src="images/bedana-don.jpg" alt="Bedana doni" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-              <span class="absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-bold bg-brand-600 text-white shadow-sm">
-                Xaridorgir
-              </span>
-            </div>
-            <div class="p-5 space-y-2">
-              <div class="flex items-center justify-between text-xs font-semibold text-stone-500">
-                <span>Bedanalar uchun</span>
-                <span class="text-brand-700 bg-brand-50 px-2 py-0.5 rounded-md">1 kg</span>
-              </div>
-              <h3 class="font-extrabold text-stone-900 text-base group-hover:text-brand-600 transition-colors">
-                Bedanalar uchun maxsus sara don
-              </h3>
-              <p class="text-xs text-stone-500 line-clamp-2">
-                Maydalangan jo'xori, sariq tariq va suli donlarining mayda maydalangan muvozanatli tarkibi.
-              </p>
-            </div>
-          </div>
-          <div class="p-5 pt-0">
-            <div class="flex items-baseline justify-between mb-4 pt-2 border-t border-stone-100">
-              <span class="text-xs text-stone-400 font-medium">Narxi:</span>
-              <span class="text-xl font-black text-brand-700">16 000 <span class="text-xs font-semibold text-stone-500">so'm</span></span>
-            </div>
-            <button onclick="handleAddToCart(this, 'prod-4', 'Bedanalar uchun maxsus sara don', 16000, '1 kg', 'images/bedana-don.jpg')" class="w-full py-3 rounded-xl bg-brand-600 hover:bg-brand-700 active:scale-95 text-white font-bold text-sm shadow-md shadow-brand-600/20 transition-all flex items-center justify-center gap-2">
-              <i class="fa-solid fa-cart-plus"></i>
-              <span>Savatchaga qo'shish</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- 5. Tozalangan Oq Tariq -->
-        <div class="product-card group bg-white rounded-3xl overflow-hidden border border-stone-200/80 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
-          <div>
-            <div class="relative h-52 overflow-hidden bg-stone-100">
-              <img src="https://images.unsplash.com/photo-1598965675045-45c5e72c7d05?auto=format&fit=crop&w=600&q=80" alt="Oq tariq" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-            </div>
-            <div class="p-5 space-y-2">
-              <div class="flex items-center justify-between text-xs font-semibold text-stone-500">
-                <span>To'tiqush & Qushlar</span>
-                <span class="text-brand-700 bg-brand-50 px-2 py-0.5 rounded-md">1 kg</span>
-              </div>
-              <h3 class="font-extrabold text-stone-900 text-base group-hover:text-brand-600 transition-colors">
-                Tozalangan Oq Tariq (1-nav)
-              </h3>
-              <p class="text-xs text-stone-500 line-clamp-2">
-                Maxsus elangan, to'ti qushlari va sayroqi qushlar uchun a'lo darajadagi toza oq tariq doni.
-              </p>
-            </div>
-          </div>
-          <div class="p-5 pt-0">
-            <div class="flex items-baseline justify-between mb-4 pt-2 border-t border-stone-100">
-              <span class="text-xs text-stone-400 font-medium">Narxi:</span>
-              <span class="text-xl font-black text-brand-700">18 000 <span class="text-xs font-semibold text-stone-500">so'm</span></span>
-            </div>
-            <button onclick="handleAddToCart(this, 'prod-5', 'Tozalangan Oq Tariq (1-nav)', 18000, '1 kg', 'https://images.unsplash.com/photo-1598965675045-45c5e72c7d05?auto=format&fit=crop&w=600&q=80')" class="w-full py-3 rounded-xl bg-brand-600 hover:bg-brand-700 active:scale-95 text-white font-bold text-sm shadow-md shadow-brand-600/20 transition-all flex items-center justify-center gap-2">
-              <i class="fa-solid fa-cart-plus"></i>
-              <span>Savatchaga qo'shish</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- 6. Kaptarlar uchun 7 xil don -->
-        <div class="product-card group bg-white rounded-3xl overflow-hidden border border-stone-200/80 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
-          <div>
-            <div class="relative h-52 overflow-hidden bg-stone-100">
-              <img src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&w=600&q=80" alt="Kaptar doni" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-            </div>
-            <div class="p-5 space-y-2">
-              <div class="flex items-center justify-between text-xs font-semibold text-stone-500">
-                <span>Kaptarlar uchun</span>
-                <span class="text-brand-700 bg-brand-50 px-2 py-0.5 rounded-md">1 kg</span>
-              </div>
-              <h3 class="font-extrabold text-stone-900 text-base group-hover:text-brand-600 transition-colors">
-                Kaptarlar uchun 7 xil don aralashmasi
-              </h3>
-              <p class="text-xs text-stone-500 line-clamp-2">
-                No'xat, vika, makkajo'xori, bug'doy, tariq va suli donlari. Kaptarlarning baquvvat uchishi uchun.
-              </p>
-            </div>
-          </div>
-          <div class="p-5 pt-0">
-            <div class="flex items-baseline justify-between mb-4 pt-2 border-t border-stone-100">
-              <span class="text-xs text-stone-400 font-medium">Narxi:</span>
-              <span class="text-xl font-black text-brand-700">24 000 <span class="text-xs font-semibold text-stone-500">so'm</span></span>
-            </div>
-            <button onclick="handleAddToCart(this, 'prod-6', 'Kaptarlar uchun 7 xil don aralashmasi', 24000, '1 kg', 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&w=600&q=80')" class="w-full py-3 rounded-xl bg-brand-600 hover:bg-brand-700 active:scale-95 text-white font-bold text-sm shadow-md shadow-brand-600/20 transition-all flex items-center justify-center gap-2">
-              <i class="fa-solid fa-cart-plus"></i>
-              <span>Savatchaga qo'shish</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- 7. Saralangan Bug'doy -->
-        <div class="product-card group bg-white rounded-3xl overflow-hidden border border-stone-200/80 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
-          <div>
-            <div class="relative h-52 overflow-hidden bg-stone-100">
-              <img src="https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?auto=format&fit=crop&w=600&q=80" alt="Bug'doy doni" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-            </div>
-            <div class="p-5 space-y-2">
-              <div class="flex items-center justify-between text-xs font-semibold text-stone-500">
-                <span>Parrandalar uchun</span>
-                <span class="text-brand-700 bg-brand-50 px-2 py-0.5 rounded-md">1 kg</span>
-              </div>
-              <h3 class="font-extrabold text-stone-900 text-base group-hover:text-brand-600 transition-colors">
-                Saralangan toza bug'doy (1-nav)
-              </h3>
-              <p class="text-xs text-stone-500 line-clamp-2">
-                Namlikdan xoli, toza quruq va elangan bug'doy. Tovuq va parrandalar uchun tabiiy oziq.
-              </p>
-            </div>
-          </div>
-          <div class="p-5 pt-0">
-            <div class="flex items-baseline justify-between mb-4 pt-2 border-t border-stone-100">
-              <span class="text-xs text-stone-400 font-medium">Narxi:</span>
-              <span class="text-xl font-black text-brand-700">4 500 <span class="text-xs font-semibold text-stone-500">so'm</span></span>
-            </div>
-            <button onclick="handleAddToCart(this, 'prod-7', 'Saralangan toza bug\'doy (1-nav)', 4500, '1 kg', 'https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?auto=format&fit=crop&w=600&q=80')" class="w-full py-3 rounded-xl bg-brand-600 hover:bg-brand-700 active:scale-95 text-white font-bold text-sm shadow-md shadow-brand-600/20 transition-all flex items-center justify-center gap-2">
-              <i class="fa-solid fa-cart-plus"></i>
-              <span>Savatchaga qo'shish</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- 8. Maydalangan Makkajo'xori (Yorma) -->
-        <div class="product-card group bg-white rounded-3xl overflow-hidden border border-stone-200/80 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
-          <div>
-            <div class="relative h-52 overflow-hidden bg-stone-100">
-              <img src="https://images.unsplash.com/photo-1551754655-cd27e38d2076?auto=format&fit=crop&w=600&q=80" alt="Jo'xori yormasi" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-            </div>
-            <div class="p-5 space-y-2">
-              <div class="flex items-center justify-between text-xs font-semibold text-stone-500">
-                <span>Parrandalar uchun</span>
-                <span class="text-brand-700 bg-brand-50 px-2 py-0.5 rounded-md">1 kg</span>
-              </div>
-              <h3 class="font-extrabold text-stone-900 text-base group-hover:text-brand-600 transition-colors">
-                Maydalangan sariq jo'xori (Yorma)
-              </h3>
-              <p class="text-xs text-stone-500 line-clamp-2">
-                Parrandalar tez semirishi va tuxum sarig'i to'q sariq bo'lishi uchun maydalangan sara jo'xori.
-              </p>
-            </div>
-          </div>
-          <div class="p-5 pt-0">
-            <div class="flex items-baseline justify-between mb-4 pt-2 border-t border-stone-100">
-              <span class="text-xs text-stone-400 font-medium">Narxi:</span>
-              <span class="text-xl font-black text-brand-700">5 500 <span class="text-xs font-semibold text-stone-500">so'm</span></span>
-            </div>
-            <button onclick="handleAddToCart(this, 'prod-8', 'Maydalangan sariq jo\'xori (Yorma)', 5500, '1 kg', 'https://images.unsplash.com/photo-1551754655-cd27e38d2076?auto=format&fit=crop&w=600&q=80')" class="w-full py-3 rounded-xl bg-brand-600 hover:bg-brand-700 active:scale-95 text-white font-bold text-sm shadow-md shadow-brand-600/20 transition-all flex items-center justify-center gap-2">
-              <i class="fa-solid fa-cart-plus"></i>
-              <span>Savatchaga qo'shish</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- 9. Tozalangan Suli (Oves) -->
-        <div class="product-card group bg-white rounded-3xl overflow-hidden border border-stone-200/80 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
-          <div>
-            <div class="relative h-52 overflow-hidden bg-stone-100">
-              <img src="https://images.unsplash.com/photo-1612170153139-6f881ff067e0?auto=format&fit=crop&w=600&q=80" alt="Suli doni" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-            </div>
-            <div class="p-5 space-y-2">
-              <div class="flex items-center justify-between text-xs font-semibold text-stone-500">
-                <span>Kaptar va To'tilar</span>
-                <span class="text-brand-700 bg-brand-50 px-2 py-0.5 rounded-md">1 kg</span>
-              </div>
-              <h3 class="font-extrabold text-stone-900 text-base group-hover:text-brand-600 transition-colors">
-                Tozalangan suli (Oves doni)
-              </h3>
-              <p class="text-xs text-stone-500 line-clamp-2">
-                Hazm qilish a'zolari faoliyatini normallashtiruvchi, vitaminlarga boy yumshoq suli doni.
-              </p>
-            </div>
-          </div>
-          <div class="p-5 pt-0">
-            <div class="flex items-baseline justify-between mb-4 pt-2 border-t border-stone-100">
-              <span class="text-xs text-stone-400 font-medium">Narxi:</span>
-              <span class="text-xl font-black text-brand-700">8 000 <span class="text-xs font-semibold text-stone-500">so'm</span></span>
-            </div>
-            <button onclick="handleAddToCart(this, 'prod-9', 'Tozalangan suli (Oves doni)', 8000, '1 kg', 'https://images.unsplash.com/photo-1612170153139-6f881ff067e0?auto=format&fit=crop&w=600&q=80')" class="w-full py-3 rounded-xl bg-brand-600 hover:bg-brand-700 active:scale-95 text-white font-bold text-sm shadow-md shadow-brand-600/20 transition-all flex items-center justify-center gap-2">
-              <i class="fa-solid fa-cart-plus"></i>
-              <span>Savatchaga qo'shish</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- 10. Tovuqlar omixta yemi (PK-1) -->
-        <div class="product-card group bg-white rounded-3xl overflow-hidden border border-stone-200/80 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
-          <div>
-            <div class="relative h-52 overflow-hidden bg-stone-100">
-              <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=600&q=80" alt="Tuxum yemi" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-              <span class="absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-bold bg-amber-500 text-white shadow-sm">
-                Granula
-              </span>
-            </div>
-            <div class="p-5 space-y-2">
-              <div class="flex items-center justify-between text-xs font-semibold text-stone-500">
-                <span>Tuxum beruvchi tovuqlar</span>
-                <span class="text-brand-700 bg-brand-50 px-2 py-0.5 rounded-md">1 kg</span>
-              </div>
-              <h3 class="font-extrabold text-stone-900 text-base group-hover:text-brand-600 transition-colors">
-                Tuxum yo'nalishidagi omixta yem (PK-1)
-              </h3>
-              <p class="text-xs text-stone-500 line-clamp-2">
-                Tuxumdorlikni yuqori darajada ushlab turuvchi kalsiy, oqsil va premiks bilan to'yintirilgan granula yem.
-              </p>
-            </div>
-          </div>
-          <div class="p-5 pt-0">
-            <div class="flex items-baseline justify-between mb-4 pt-2 border-t border-stone-100">
-              <span class="text-xs text-stone-400 font-medium">Narxi:</span>
-              <span class="text-xl font-black text-brand-700">7 500 <span class="text-xs font-semibold text-stone-500">so'm</span></span>
-            </div>
-            <button onclick="handleAddToCart(this, 'prod-10', 'Tuxum yo\'nalishidagi omixta yem (PK-1)', 7500, '1 kg', 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=600&q=80')" class="w-full py-3 rounded-xl bg-brand-600 hover:bg-brand-700 active:scale-95 text-white font-bold text-sm shadow-md shadow-brand-600/20 transition-all flex items-center justify-center gap-2">
-              <i class="fa-solid fa-cart-plus"></i>
-              <span>Savatchaga qo'shish</span>
-            </button>
-          </div>
-        </div>
-
+      <!-- Products Grid (Dinamik render qilinadi) -->
+      <div id="productsGridContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <!-- JS orqali to'ldiriladi -->
       </div>
 
     </div>
@@ -1019,6 +694,213 @@
       botToken: "8919348960:AAGI5FZcybafNEPM1FfOrtvDVkfdf4eNkyA",
       chatId: "8957417494"
     };
+
+    // --- PRODUCTS STATE & DATA ---
+    const DEFAULT_PRODUCTS = [
+      {
+        id: 'prod-1',
+        name: "Kanareka uchun maxsus sayrash ozuqasi",
+        price: 26000,
+        unit: "1 kg",
+        image: "images/kanareka-don.jpg",
+        tag: "Premium",
+        category: "Kanareykalar uchun",
+        description: "Kanarekalarning jarangdor sayrashini ta'minlovchi raps, tariq va sara urug'lar aralashmasi.",
+        composition: "Raps (30%), Kanareychik (25%), Sariq tariq (20%), Qizil tariq (15%), Oq kunjut va vitaminli premiks (10%)"
+      },
+      {
+        id: 'prod-2',
+        name: "Amadinka qushlari uchun elangan don",
+        price: 22000,
+        unit: "1 kg",
+        image: "images/amadinka-don.jpg",
+        tag: "Tozalangan",
+        category: "Amadinlar uchun",
+        description: "Amadinlar va mayda qushlar uchun maxsus saralangan mayda tariq va vitaminli donlar.",
+        composition: "Mayda oq tariq (40%), Sariq tariq (30%), Qizil tariq (15%), Mogar (10%), Minerallar (5%)"
+      },
+      {
+        id: 'prod-3',
+        name: "Kokil qushlari uchun mevali don aralashmasi",
+        price: 34000,
+        unit: "1 kg",
+        image: "images/kokil-don.jpg",
+        tag: "Mevali",
+        category: "Kokil va To'tilar",
+        description: "Pista, yer yong'oq, suli va quritilgan mevalar bilan boyitilgan to'yimli kokil ozuqasi.",
+        composition: "Kungaboqar pistasi (25%), Tozalangan suli (20%), Sariq/oq tariq (25%), Quritilgan mevalar (15%), Yong'oq (15%)"
+      },
+      {
+        id: 'prod-4',
+        name: "Bedanalar uchun maxsus sara don",
+        price: 16000,
+        unit: "1 kg",
+        image: "images/bedana-don.jpg",
+        tag: "Xaridorgir",
+        category: "Bedanalar uchun",
+        description: "Bedanalar tuxum berishini 30% gacha oshiruvchi kalsiy va maydalangan dukkakli donlar.",
+        composition: "Maydalangan makkajo'xori (35%), Bug'doy yormasi (30%), Mayda tariq (20%), Kalsiy/chig'anoq (10%), Soya (5%)"
+      },
+      {
+        id: 'prod-5',
+        name: "Tozalangan Oq Tariq (1-nav)",
+        price: 18000,
+        unit: "1 kg",
+        image: "https://images.unsplash.com/photo-1598965675045-45c5e72c7d05?auto=format&fit=crop&w=600&q=80",
+        tag: "Don",
+        category: "Barcha qushlar uchun",
+        description: "Chang va xashaklardan tozalangan, 1-navli yaltiroq sara oq tariq doni.",
+        composition: "100% saralangan va tozalangan sara oq tariq doni (namlik 12% dan past)"
+      },
+      {
+        id: 'prod-6',
+        name: "Kaptarlar uchun 7 xil don aralashmasi",
+        price: 24000,
+        unit: "1 kg",
+        image: "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&w=600&q=80",
+        tag: "Don",
+        category: "Kaptarlar uchun",
+        description: "Sport va zotdor kaptarlar quvvatini oshiruvchi no'xat, vika, makkajo'xori va tariq aralashmasi.",
+        composition: "Sariq no'xat (20%), Sara bug'doy (20%), Qizil jo'xori (20%), Tariq (15%), Vika doni (10%), Suli va arpa (15%)"
+      },
+      {
+        id: 'prod-7',
+        name: "Saralangan toza bug'doy (1-nav)",
+        price: 4500,
+        unit: "1 kg",
+        image: "https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?auto=format&fit=crop&w=600&q=80",
+        tag: "Don",
+        category: "Parrandalar uchun",
+        description: "Namlikdan xoli, toza quruq va elangan bug'doy. Tovuq va parrandalar uchun tabiiy oziq.",
+        composition: "100% sara tozalangan toza bug'doy doni (oqsil 12.5%+)"
+      },
+      {
+        id: 'prod-8',
+        name: "Maydalangan sariq jo'xori (Yorma)",
+        price: 5500,
+        unit: "1 kg",
+        image: "https://images.unsplash.com/photo-1551754655-cd27e38d2076?auto=format&fit=crop&w=600&q=80",
+        tag: "Yorma",
+        category: "Parrandalar uchun",
+        description: "Parrandalar tez semirishi va tuxum sarig'i to'q sariq bo'lishi uchun maydalangan sara jo'xori.",
+        composition: "100% tabiiy sariq makkajo'xori yormasi (karotinga boy)"
+      },
+      {
+        id: 'prod-9',
+        name: "Tozalangan suli (Oves doni)",
+        price: 8000,
+        unit: "1 kg",
+        image: "https://images.unsplash.com/photo-1612170153139-6f881ff067e0?auto=format&fit=crop&w=600&q=80",
+        tag: "Don",
+        category: "Kaptar va To'tilar",
+        description: "Hazm qilish a'zolari faoliyatini normallashtiruvchi, vitaminlarga boy yumshoq suli doni.",
+        composition: "100% yumshoq qobiqli saralangan suli doni (B-vitaminlar va kletchatka)"
+      },
+      {
+        id: 'prod-10',
+        name: "Tuxum yo'nalishidagi omixta yem (PK-1)",
+        price: 7500,
+        unit: "1 kg",
+        image: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=600&q=80",
+        tag: "Granula",
+        category: "Tuxum beruvchi tovuqlar",
+        description: "Tuxumdorlikni yuqori darajada ushlab turuvchi kalsiy, oqsil va premiks bilan to'yintirilgan granula yem.",
+        composition: "Bug'doy, makkajo'xori, shrot, baliq uni, kalsiy/bo'r (3.8%), vitamin-mineral premiksi"
+      }
+    ];
+
+    let storeProducts = [];
+
+    // API manzilini aniqlash
+    const API_BASE_URL = (window.location.protocol === 'http:' || window.location.protocol === 'https:') && window.location.port === '3000'
+      ? ''
+      : 'http://localhost:3000';
+
+    // Mahsulotlarni yuklash (Server API -> localStorage -> Default)
+    async function loadStoreProducts() {
+      try {
+        const res = await fetch(`${API_BASE_URL}/api/products`);
+        const data = await res.json();
+        if (data.success && Array.isArray(data.products) && data.products.length > 0) {
+          storeProducts = data.products;
+          localStorage.setItem('ozuqadon_products', JSON.stringify(storeProducts));
+          renderStoreProducts();
+          return;
+        }
+      } catch (e) {
+        console.warn("Serverdan mahsulotlarni yuklashda ogohlantirish:", e);
+      }
+
+      const saved = localStorage.getItem('ozuqadon_products');
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            storeProducts = parsed;
+            renderStoreProducts();
+            return;
+          }
+        } catch(e) {}
+      }
+
+      storeProducts = [...DEFAULT_PRODUCTS];
+      renderStoreProducts();
+    }
+
+    // Mahsulotlar kartalarini dinamik render qilish (Tarkibi bilan!)
+    function renderStoreProducts() {
+      const container = document.getElementById('productsGridContainer');
+      if (!container) return;
+
+      container.innerHTML = storeProducts.map(p => `
+        <div class="product-card group bg-white rounded-3xl overflow-hidden border border-stone-200/80 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+          <div>
+            <div class="relative h-52 overflow-hidden bg-stone-100">
+              <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?auto=format&fit=crop&w=600&q=80'">
+              ${p.tag ? `
+                <span class="absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-bold bg-amber-500 text-white shadow-sm">
+                  ${p.tag}
+                </span>
+              ` : ''}
+            </div>
+            <div class="p-5 space-y-3">
+              <div class="flex items-center justify-between text-xs font-semibold text-stone-500">
+                <span>${p.category || 'Parrandalar uchun'}</span>
+                <span class="text-brand-700 bg-brand-50 px-2.5 py-0.5 rounded-md font-bold">${p.unit || '1 kg'}</span>
+              </div>
+              <h3 class="font-extrabold text-stone-900 text-base group-hover:text-brand-600 transition-colors line-clamp-2">
+                ${p.name}
+              </h3>
+              <p class="text-xs text-stone-500 line-clamp-2">
+                ${p.description || ''}
+              </p>
+
+              <!-- Mahsulot tarkibi (Nimadan tashkil topganligi) -->
+              <div class="p-3 rounded-2xl bg-amber-50/70 border border-amber-200/60 text-xs text-amber-950 space-y-1">
+                <div class="flex items-center gap-1.5 font-bold text-[11px] text-amber-800">
+                  <i class="fa-solid fa-wheat-awn"></i>
+                  <span>Tarkibi:</span>
+                </div>
+                <p class="text-[11px] leading-relaxed text-amber-900/90 font-medium">
+                  ${p.composition || "100% tabiiy va tozalangan sara donlar"}
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="p-5 pt-0">
+            <div class="flex items-baseline justify-between mb-4 pt-3 border-t border-stone-100">
+              <span class="text-xs text-stone-400 font-medium">Narxi:</span>
+              <span class="text-xl font-black text-brand-700">${formatPrice(p.price)} <span class="text-xs font-semibold text-stone-500">/ ${p.unit || '1 kg'}</span></span>
+            </div>
+            <button onclick="handleAddToCart(this, '${p.id}', '${p.name.replace(/'/g, "\\'")}', ${p.price}, '${p.unit || '1 kg'}', '${p.image}')" class="w-full py-3 rounded-xl bg-brand-600 hover:bg-brand-700 active:scale-95 text-white font-bold text-sm shadow-md shadow-brand-600/20 transition-all flex items-center justify-center gap-2">
+              <i class="fa-solid fa-cart-plus"></i>
+              <span>Savatchaga qo'shish</span>
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
 
     // --- CART STATE ---
     // Cart item format: { id, name, price, unit, image, quantity }
@@ -1493,7 +1375,7 @@
     }
 
     // Initialize cart on load
-    document.addEventListener('DOMContentLoaded', initCart);
+    document.addEventListener('DOMContentLoaded', () => { initCart(); loadStoreProducts(); });
   </script>
 
 </body>

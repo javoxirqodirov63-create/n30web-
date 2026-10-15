@@ -1,0 +1,112 @@
+[
+  {
+    "id": "prod-1",
+    "name": "Kanareka uchun maxsus sayrash ozuqasi",
+    "price": 26000,
+    "unit": "1 kg",
+    "image": "images/kanareka-don.jpg",
+    "tag": "Premium",
+    "category": "Kanareykalar uchun",
+    "description": "Kanarekalarning jarangdor sayrashini ta'minlovchi raps, tariq va sara urug'lar aralashmasi.",
+    "composition": "Raps (30%), Kanareychik (25%), Sariq tariq (20%), Qizil tariq (15%), Oq kunjut va vitaminli premiks (10%)"
+  },
+  {
+    "id": "prod-2",
+    "name": "Amadinka qushlari uchun elangan don",
+    "price": 22000,
+    "unit": "1 kg",
+    "image": "images/amadinka-don.jpg",
+    "tag": "Tozalangan",
+    "category": "Amadinlar uchun",
+    "description": "Amadinlar va mayda qushlar uchun maxsus saralangan mayda tariq va vitaminli donlar.",
+    "composition": "Mayda oq tariq (40%), Sariq tariq (30%), Qizil tariq (15%), Mogar (10%), Minerallar (5%)"
+  },
+  {
+    "id": "prod-3",
+    "name": "Kokil qushlari uchun mevali don aralashmasi",
+    "price": 34000,
+    "unit": "1 kg",
+    "image": "images/kokil-don.jpg",
+    "tag": "Mevali",
+    "category": "Kokil va To'tilar",
+    "description": "Pista, yer yong'oq, suli va quritilgan mevalar bilan boyitilgan to'yimli kokil ozuqasi.",
+    "composition": "Kungaboqar pistasi (25%), Tozalangan suli (20%), Sariq/oq tariq (25%), Quritilgan mevalar (15%), Yong'oq (15%)"
+  },
+  {
+    "id": "prod-4",
+    "name": "Bedanalar uchun maxsus sara don",
+    "price": 16000,
+    "unit": "1 kg",
+    "image": "images/bedana-don.jpg",
+    "tag": "Xaridorgir",
+    "category": "Bedanalar uchun",
+    "description": "Bedanalar tuxum berishini 30% gacha oshiruvchi kalsiy va maydalangan dukkakli donlar.",
+    "composition": "Maydalangan makkajo'xori (35%), Bug'doy yormasi (30%), Mayda tariq (20%), Kalsiy/chig'anoq (10%), Soya (5%)"
+  },
+  {
+    "id": "prod-5",
+    "name": "Tozalangan Oq Tariq (1-nav)",
+    "price": 18000,
+    "unit": "1 kg",
+    "image": "https://images.unsplash.com/photo-1598965675045-45c5e72c7d05?auto=format&fit=crop&w=600&q=80",
+    "tag": "Don",
+    "category": "Barcha qushlar uchun",
+    "description": "Chang va xashaklardan tozalangan, 1-navli yaltiroq sara oq tariq doni.",
+    "composition": "100% saralangan va tozalangan sara oq tariq doni (namlik 12% dan past)"
+  },
+  {
+    "id": "prod-6",
+    "name": "Kaptarlar uchun 7 xil don aralashmasi",
+    "price": 24000,
+    "unit": "1 kg",
+    "image": "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&w=600&q=80",
+    "tag": "Don",
+    "category": "Kaptarlar uchun",
+    "description": "Sport va zotdor kaptarlar quvvatini oshiruvchi no'xat, vika, makkajo'xori va tariq aralashmasi.",
+    "composition": "Sariq no'xat (20%), Sara bug'doy (20%), Qizil jo'xori (20%), Tariq (15%), Vika doni (10%), Suli va arpa (15%)"
+  },
+  {
+    "id": "prod-7",
+    "name": "Saralangan toza bug'doy (1-nav)",
+    "price": 4500,
+    "unit": "1 kg",
+    "image": "https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?auto=format&fit=crop&w=600&q=80",
+    "tag": "Don",
+    "category": "Parrandalar uchun",
+    "description": "Namlikdan xoli, toza quruq va elangan bug'doy. Tovuq va parrandalar uchun tabiiy oziq.",
+    "composition": "100% sara tozalangan toza bug'doy doni (oqsil 12.5%+)"
+  },
+  {
+    "id": "prod-8",
+    "name": "Maydalangan sariq jo'xori (Yorma)",
+    "price": 5500,
+    "unit": "1 kg",
+    "image": "https://images.unsplash.com/photo-1551754655-cd27e38d2076?auto=format&fit=crop&w=600&q=80",
+    "tag": "Yorma",
+    "category": "Parrandalar uchun",
+    "description": "Parrandalar tez semirishi va tuxum sarig'i to'q sariq bo'lishi uchun maydalangan sara jo'xori.",
+    "composition": "100% tabiiy sariq makkajo'xori yormasi (karotinga boy)"
+  },
+  {
+    "id": "prod-9",
+    "name": "Tozalangan suli (Oves doni)",
+    "price": 8000,
+    "unit": "1 kg",
+    "image": "https://images.unsplash.com/photo-1612170153139-6f881ff067e0?auto=format&fit=crop&w=600&q=80",
+    "tag": "Don",
+    "category": "Kaptar va To'tilar",
+    "description": "Hazm qilish a'zolari faoliyatini normallashtiruvchi, vitaminlarga boy yumshoq suli doni.",
+    "composition": "100% yumshoq qobiqli saralangan suli doni (B-vitaminlar va kletchatka)"
+  },
+  {
+    "id": "prod-10",
+    "name": "Tuxum yo'nalishidagi omixta yem (PK-1)",
+    "price": 7500,
+    "unit": "1 kg",
+    "image": "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=600&q=80",
+    "tag": "Granula",
+    "category": "Tuxum beruvchi tovuqlar",
+    "description": "Tuxumdorlikni yuqori darajada ushlab turuvchi kalsiy, oqsil va premiks bilan to'yintirilgan granula yem.",
+    "composition": "Bug'doy, makkajo'xori, shrot, baliq uni, kalsiy/bo'r (3.8%), vitamin-mineral premiksi"
+  }
+]

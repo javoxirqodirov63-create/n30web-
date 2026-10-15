@@ -206,6 +206,40 @@ app.post('/api/test-telegram', async (req, res) => {
   return res.json(sendRes);
 });
 
+// Products API: get and update products list
+const fs = require('fs');
+const PRODUCTS_FILE = path.join(__dirname, 'products.json');
+
+// GET /api/products — Mahsulotlar ro'yxatini olish
+app.get('/api/products', (req, res) => {
+  try {
+    if (fs.existsSync(PRODUCTS_FILE)) {
+      const data = fs.readFileSync(PRODUCTS_FILE, 'utf8');
+      return res.json({ success: true, products: JSON.parse(data) });
+    }
+    return res.json({ success: true, products: [] });
+  } catch (err) {
+    console.error("Products read error:", err);
+    return res.status(500).json({ success: false, error: "Mahsulotlarni o'qishda xatolik" });
+  }
+});
+
+// POST /api/products — Mahsulotlarni yangilash / saqlash
+app.post('/api/products', (req, res) => {
+  try {
+    const { products } = req.body;
+    if (!Array.isArray(products)) {
+      return res.status(400).json({ success: false, error: "Mahsulotlar ro'yxati noto'g'ri formatda" });
+    }
+    fs.writeFileSync(PRODUCTS_FILE, JSON.stringify(products, null, 2), 'utf8');
+    console.log(`[Admin ✅] ${products.length} ta mahsulot muvaffaqiyatli saqlandi!`);
+    return res.json({ success: true, message: "Mahsulotlar muvaffaqiyatli saqlandi!", products });
+  } catch (err) {
+    console.error("Products write error:", err);
+    return res.status(500).json({ success: false, error: "Mahsulotlarni saqlashda xatolik" });
+  }
+});
+
 // Start Express Server
 app.listen(PORT, () => {
   console.log(`===============================================`);

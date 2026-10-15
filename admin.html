@@ -238,15 +238,28 @@
 
       <!-- ==================== TAB 2: MAHSULOTLAR RO'YXATI ==================== -->
       <div id="productsTabContent" class="hidden space-y-6">
-        <div class="bg-white rounded-3xl p-6 border border-stone-200/80 shadow-xs">
-          <div class="flex items-center justify-between mb-6">
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-stone-200/80 shadow-xs space-y-6">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-stone-100">
             <div>
-              <h3 class="text-lg font-black text-stone-900">Do'kon mahsulotlari (10 ta)</h3>
-              <p class="text-xs text-stone-500">Katalogdagi faol mahsulotlar va narxlar</p>
+              <div class="flex items-center gap-2">
+                <h3 class="text-xl font-black text-stone-900">Do'kon mahsulotlari boshqaruvi</h3>
+                <span id="adminProductCountBadge" class="px-2.5 py-0.5 rounded-full text-xs font-black bg-brand-50 text-brand-700">10 ta</span>
+              </div>
+              <p class="text-xs text-stone-500 mt-1">Narxlarni, rasmlarni va mahsulot tarkibi (nimadan tashkil topganligi)ni tahrirlash</p>
+            </div>
+            <div class="flex items-center gap-2.5">
+              <button onclick="resetProductsToDefault()" class="px-3.5 py-2.5 rounded-xl border border-stone-200 hover:bg-stone-50 text-stone-600 font-bold text-xs flex items-center gap-1.5 transition-all">
+                <i class="fa-solid fa-rotate-left"></i>
+                <span class="hidden sm:inline">Standart holat</span>
+              </button>
+              <button onclick="openProductModal()" class="px-4 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 active:scale-95 text-white font-black text-xs flex items-center gap-2 shadow-sm transition-all">
+                <i class="fa-solid fa-plus"></i>
+                <span>Yangi mahsulot</span>
+              </button>
             </div>
           </div>
 
-          <div id="adminProductsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div id="adminProductsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             <!-- Dynamically populated -->
           </div>
         </div>
@@ -256,24 +269,220 @@
   </div>
 
 
+  <!-- ==================== MODAL: MAHSULOTNI TAHRIRLASH / YARATISH ==================== -->
+  <div id="productModal" class="fixed inset-0 z-50 bg-stone-900/60 backdrop-blur-sm hidden items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white rounded-3xl max-w-xl w-full p-6 sm:p-8 space-y-6 shadow-2xl my-8">
+      
+      <div class="flex items-center justify-between border-b border-stone-100 pb-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-brand-50 text-brand-700 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-pen-to-square"></i>
+          </div>
+          <div>
+            <h3 id="productModalTitle" class="text-lg font-black text-stone-900">Mahsulotni tahrirlash</h3>
+            <p class="text-xs text-stone-500">Narx, rasm va tarkib ma'lumotlarini o'zgartirish</p>
+          </div>
+        </div>
+        <button onclick="closeProductModal()" class="w-8 h-8 rounded-xl hover:bg-stone-100 text-stone-400 hover:text-stone-700 flex items-center justify-center transition-colors">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <form id="productEditForm" onsubmit="handleSaveProduct(event)" class="space-y-4">
+        <input type="hidden" id="editProdId">
+
+        <!-- Nomi -->
+        <div>
+          <label class="block text-xs font-bold text-stone-700 mb-1">Mahsulot nomi <span class="text-red-500">*</span></label>
+          <input type="text" id="editProdName" required placeholder="Masalan: Kanareka uchun maxsus sayrash ozuqasi" class="w-full px-3.5 py-2.5 rounded-xl bg-stone-50 border border-stone-200 text-stone-900 text-sm font-semibold focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500">
+        </div>
+
+        <!-- Narxi va O'lchov birligi -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold text-stone-700 mb-1">Narxi (so'mda) <span class="text-red-500">*</span></label>
+            <input type="number" id="editProdPrice" required min="100" step="100" placeholder="26000" class="w-full px-3.5 py-2.5 rounded-xl bg-stone-50 border border-stone-200 text-stone-900 text-sm font-semibold focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-stone-700 mb-1">O'lchov birligi</label>
+            <input type="text" id="editProdUnit" required placeholder="1 kg" class="w-full px-3.5 py-2.5 rounded-xl bg-stone-50 border border-stone-200 text-stone-900 text-sm font-semibold focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500">
+          </div>
+        </div>
+
+        <!-- Kategoriya va Yorliq -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold text-stone-700 mb-1">Kategoriya / Guruh</label>
+            <input type="text" id="editProdCategory" placeholder="Masalan: Kanareykalar uchun" class="w-full px-3.5 py-2.5 rounded-xl bg-stone-50 border border-stone-200 text-stone-900 text-sm font-semibold focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-stone-700 mb-1">Yorliq (Tag)</label>
+            <input type="text" id="editProdTag" placeholder="Masalan: Premium, Tozalangan, Don" class="w-full px-3.5 py-2.5 rounded-xl bg-stone-50 border border-stone-200 text-stone-900 text-sm font-semibold focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500">
+          </div>
+        </div>
+
+        <!-- Rasm havolasi -->
+        <div>
+          <label class="block text-xs font-bold text-stone-700 mb-1">Rasm havolasi (URL yoki loyiha fayli yo'li) <span class="text-red-500">*</span></label>
+          <div class="flex gap-3 items-center">
+            <input type="text" id="editProdImage" required oninput="previewProductImage(this.value)" placeholder="images/kanareka-don.jpg yoki https://..." class="flex-1 px-3.5 py-2.5 rounded-xl bg-stone-50 border border-stone-200 text-stone-900 text-sm font-semibold focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500">
+            <img id="editProdImagePreview" src="images/kanareka-don.jpg" alt="Preview" class="w-11 h-11 rounded-xl object-cover border border-stone-200 bg-stone-100 shrink-0" onerror="this.src='https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?auto=format&fit=crop&w=150&q=80'">
+          </div>
+          <p class="text-[11px] text-stone-400 mt-1">Loyiha ichidagi rasmlar: <code>images/kanareka-don.jpg</code>, <code>images/amadinka-don.jpg</code>, <code>images/kokil-don.jpg</code>, <code>images/bedana-don.jpg</code> yoki internetdagi ixtiyoriy rasm linki.</p>
+        </div>
+
+        <!-- Qisqa tavsifi -->
+        <div>
+          <label class="block text-xs font-bold text-stone-700 mb-1">Qisqa tavsif</label>
+          <textarea id="editProdDescription" rows="2" placeholder="Mahsulot haqida qisqacha ma'lumot..." class="w-full px-3.5 py-2 rounded-xl bg-stone-50 border border-stone-200 text-stone-900 text-xs font-medium focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500"></textarea>
+        </div>
+
+        <!-- Tarkibi / Nimadan tashkil topganligi -->
+        <div>
+          <div class="flex items-center justify-between mb-1">
+            <label class="block text-xs font-black text-brand-800">
+              🌾 Tarkibi (Nimadan tashkil topganligi) <span class="text-red-500">*</span>
+            </label>
+            <span class="text-[10px] text-stone-400 font-medium">Urug'lar, mevalar, vitaminlar, foizlar</span>
+          </div>
+          <textarea id="editProdComposition" rows="2" required placeholder="Masalan: Raps (30%), Kanareychik (25%), Sariq tariq (20%), Qizil tariq (15%), Oq kunjut va vitaminli premiks (10%)" class="w-full px-3.5 py-2.5 rounded-xl bg-brand-50/50 border border-brand-200 text-stone-900 text-xs font-semibold focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500"></textarea>
+        </div>
+
+        <!-- Tugmalar -->
+        <div class="flex items-center justify-end gap-3 pt-3 border-t border-stone-100">
+          <button type="button" onclick="closeProductModal()" class="px-5 py-2.5 rounded-xl hover:bg-stone-100 text-stone-600 font-bold text-xs transition-colors">
+            Bekor qilish
+          </button>
+          <button type="submit" class="px-6 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-black text-xs shadow-md shadow-brand-600/20 transition-all flex items-center gap-2">
+            <i class="fa-solid fa-floppy-disk"></i>
+            <span>Saqlash</span>
+          </button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+
   <!-- ==================== JAVASCRIPT ==================== -->
   <script>
     const DEFAULT_PASS = "admin"; // Standart admin paroli
     let activeTab = "orders";
     let orders = [];
+    let products = [];
 
-    // Pre-defined products list for display in admin
+    // Pre-defined default products list
     const PRODUCTS_LIST = [
-      { id: 'prod-1', name: "Kanareka uchun maxsus sayrash ozuqasi", price: 26000, unit: "1 kg", image: "images/kanareka-don.jpg", tag: "Premium" },
-      { id: 'prod-2', name: "Amadinka qushlari uchun elangan don", price: 22000, unit: "1 kg", image: "images/amadinka-don.jpg", tag: "Tozalangan" },
-      { id: 'prod-3', name: "Kokil qushlari uchun mevali don aralashmasi", price: 34000, unit: "1 kg", image: "images/kokil-don.jpg", tag: "Mevali" },
-      { id: 'prod-4', name: "Bedanalar uchun maxsus sara don", price: 16000, unit: "1 kg", image: "images/bedana-don.jpg", tag: "Xaridorgir" },
-      { id: 'prod-5', name: "Tozalangan Oq Tariq (1-nav)", price: 18000, unit: "1 kg", image: "https://images.unsplash.com/photo-1598965675045-45c5e72c7d05?auto=format&fit=crop&w=600&q=80", tag: "Don" },
-      { id: 'prod-6', name: "Kaptarlar uchun 7 xil don aralashmasi", price: 24000, unit: "1 kg", image: "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&w=600&q=80", tag: "Don" },
-      { id: 'prod-7', name: "Saralangan toza bug'doy (1-nav)", price: 4500, unit: "1 kg", image: "https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?auto=format&fit=crop&w=600&q=80", tag: "Don" },
-      { id: 'prod-8', name: "Maydalangan sariq jo'xori (Yorma)", price: 5500, unit: "1 kg", image: "https://images.unsplash.com/photo-1551754655-cd27e38d2076?auto=format&fit=crop&w=600&q=80", tag: "Yorma" },
-      { id: 'prod-9', name: "Tozalangan suli (Oves doni)", price: 8000, unit: "1 kg", image: "https://images.unsplash.com/photo-1612170153139-6f881ff067e0?auto=format&fit=crop&w=600&q=80", tag: "Don" },
-      { id: 'prod-10', name: "Tuxum yo'nalishidagi omixta yem (PK-1)", price: 7500, unit: "1 kg", image: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=600&q=80", tag: "Granula" }
+      {
+        id: 'prod-1',
+        name: "Kanareka uchun maxsus sayrash ozuqasi",
+        price: 26000,
+        unit: "1 kg",
+        image: "images/kanareka-don.jpg",
+        tag: "Premium",
+        category: "Kanareykalar uchun",
+        description: "Kanarekalarning jarangdor sayrashini ta'minlovchi raps, tariq va sara urug'lar aralashmasi.",
+        composition: "Raps (30%), Kanareychik (25%), Sariq tariq (20%), Qizil tariq (15%), Oq kunjut va vitaminli premiks (10%)"
+      },
+      {
+        id: 'prod-2',
+        name: "Amadinka qushlari uchun elangan don",
+        price: 22000,
+        unit: "1 kg",
+        image: "images/amadinka-don.jpg",
+        tag: "Tozalangan",
+        category: "Amadinlar uchun",
+        description: "Amadinlar va mayda qushlar uchun maxsus saralangan mayda tariq va vitaminli donlar.",
+        composition: "Mayda oq tariq (40%), Sariq tariq (30%), Qizil tariq (15%), Mogar (10%), Minerallar (5%)"
+      },
+      {
+        id: 'prod-3',
+        name: "Kokil qushlari uchun mevali don aralashmasi",
+        price: 34000,
+        unit: "1 kg",
+        image: "images/kokil-don.jpg",
+        tag: "Mevali",
+        category: "Kokil va To'tilar",
+        description: "Pista, yer yong'oq, suli va quritilgan mevalar bilan boyitilgan to'yimli kokil ozuqasi.",
+        composition: "Kungaboqar pistasi (25%), Tozalangan suli (20%), Sariq/oq tariq (25%), Quritilgan mevalar (15%), Yong'oq (15%)"
+      },
+      {
+        id: 'prod-4',
+        name: "Bedanalar uchun maxsus sara don",
+        price: 16000,
+        unit: "1 kg",
+        image: "images/bedana-don.jpg",
+        tag: "Xaridorgir",
+        category: "Bedanalar uchun",
+        description: "Bedanalar tuxum berishini 30% gacha oshiruvchi kalsiy va maydalangan dukkakli donlar.",
+        composition: "Maydalangan makkajo'xori (35%), Bug'doy yormasi (30%), Mayda tariq (20%), Kalsiy/chig'anoq (10%), Soya (5%)"
+      },
+      {
+        id: 'prod-5',
+        name: "Tozalangan Oq Tariq (1-nav)",
+        price: 18000,
+        unit: "1 kg",
+        image: "https://images.unsplash.com/photo-1598965675045-45c5e72c7d05?auto=format&fit=crop&w=600&q=80",
+        tag: "Don",
+        category: "Barcha qushlar uchun",
+        description: "Chang va xashaklardan tozalangan, 1-navli yaltiroq sara oq tariq doni.",
+        composition: "100% saralangan va tozalangan sara oq tariq doni (namlik 12% dan past)"
+      },
+      {
+        id: 'prod-6',
+        name: "Kaptarlar uchun 7 xil don aralashmasi",
+        price: 24000,
+        unit: "1 kg",
+        image: "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&w=600&q=80",
+        tag: "Don",
+        category: "Kaptarlar uchun",
+        description: "Sport va zotdor kaptarlar quvvatini oshiruvchi no'xat, vika, makkajo'xori va tariq aralashmasi.",
+        composition: "Sariq no'xat (20%), Sara bug'doy (20%), Qizil jo'xori (20%), Tariq (15%), Vika doni (10%), Suli va arpa (15%)"
+      },
+      {
+        id: 'prod-7',
+        name: "Saralangan toza bug'doy (1-nav)",
+        price: 4500,
+        unit: "1 kg",
+        image: "https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?auto=format&fit=crop&w=600&q=80",
+        tag: "Don",
+        category: "Parrandalar uchun",
+        description: "Namlikdan xoli, toza quruq va elangan bug'doy. Tovuq va parrandalar uchun tabiiy oziq.",
+        composition: "100% sara tozalangan toza bug'doy doni (oqsil 12.5%+)"
+      },
+      {
+        id: 'prod-8',
+        name: "Maydalangan sariq jo'xori (Yorma)",
+        price: 5500,
+        unit: "1 kg",
+        image: "https://images.unsplash.com/photo-1551754655-cd27e38d2076?auto=format&fit=crop&w=600&q=80",
+        tag: "Yorma",
+        category: "Parrandalar uchun",
+        description: "Parrandalar tez semirishi va tuxum sarig'i to'q sariq bo'lishi uchun maydalangan sara jo'xori.",
+        composition: "100% tabiiy sariq makkajo'xori yormasi (karotinga boy)"
+      },
+      {
+        id: 'prod-9',
+        name: "Tozalangan suli (Oves doni)",
+        price: 8000,
+        unit: "1 kg",
+        image: "https://images.unsplash.com/photo-1612170153139-6f881ff067e0?auto=format&fit=crop&w=600&q=80",
+        tag: "Don",
+        category: "Kaptar va To'tilar",
+        description: "Hazm qilish a'zolari faoliyatini normallashtiruvchi, vitaminlarga boy yumshoq suli doni.",
+        composition: "100% yumshoq qobiqli saralangan suli doni (B-vitaminlar va kletchatka)"
+      },
+      {
+        id: 'prod-10',
+        name: "Tuxum yo'nalishidagi omixta yem (PK-1)",
+        price: 7500,
+        unit: "1 kg",
+        image: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=600&q=80",
+        tag: "Granula",
+        category: "Tuxum beruvchi tovuqlar",
+        description: "Tuxumdorlikni yuqori darajada ushlab turuvchi kalsiy, oqsil va premiks bilan to'yintirilgan granula yem.",
+        composition: "Bug'doy, makkajo'xori, shrot, baliq uni, kalsiy/bo'r (3.8%), vitamin-mineral premiksi"
+      }
     ];
 
     // Auth check on load
@@ -295,7 +504,7 @@
       document.getElementById('loginSection').classList.add('hidden');
       document.getElementById('dashboardSection').classList.remove('hidden');
       loadOrders();
-      renderProducts();
+      loadProducts();
       checkTelegramStatus();
     }
 
@@ -636,19 +845,248 @@
       saveOrders();
     }
 
-    // Render Products in Admin
+    // ==================== PRODUCTS MANAGEMENT ====================
+
+    // Load products from /api/products, fallback to localStorage or default
+    async function loadProducts() {
+      try {
+        const res = await fetch(`${API_BASE}/api/products`);
+        const data = await res.json();
+        if (data.success && Array.isArray(data.products) && data.products.length > 0) {
+          products = data.products;
+          localStorage.setItem('ozuqadon_products', JSON.stringify(products));
+          renderProducts();
+          return;
+        }
+      } catch (err) {
+        console.warn("API dan mahsulotlarni yuklashda ogohlantirish:", err);
+      }
+
+      // Fallback to localStorage
+      const saved = localStorage.getItem('ozuqadon_products');
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            products = parsed;
+            renderProducts();
+            return;
+          }
+        } catch(e) {}
+      }
+
+      // Default fallback
+      products = [...PRODUCTS_LIST];
+      localStorage.setItem('ozuqadon_products', JSON.stringify(products));
+      renderProducts();
+    }
+
+    // Save products to localStorage and /api/products
+    async function saveProducts() {
+      localStorage.setItem('ozuqadon_products', JSON.stringify(products));
+      try {
+        await fetch(`${API_BASE}/api/products`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ products })
+        });
+      } catch (err) {
+        console.warn("Serverga mahsulotlarni saqlashda xatolik:", err);
+      }
+    }
+
+    // Render Products list in Admin
     function renderProducts() {
       const container = document.getElementById('adminProductsContainer');
-      container.innerHTML = PRODUCTS_LIST.map(p => `
-        <div class="p-4 rounded-2xl bg-stone-50 border border-stone-200/80 flex items-center gap-3.5">
-          <img src="${p.image}" alt="" class="w-14 h-14 rounded-xl object-cover bg-stone-200 shrink-0">
-          <div class="flex-1 min-w-0">
-            <span class="text-[10px] font-bold text-brand-700 bg-brand-50 px-2 py-0.5 rounded">${p.tag}</span>
-            <h5 class="text-xs font-bold text-stone-900 truncate mt-1">${p.name}</h5>
-            <p class="text-xs font-black text-brand-800">${formatPrice(p.price)} / ${p.unit}</p>
+      const badge = document.getElementById('adminProductCountBadge');
+      if (badge) badge.textContent = `${products.length} ta`;
+
+      if (!container) return;
+
+      if (products.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-full py-12 text-center text-stone-400 space-y-2">
+            <i class="fa-solid fa-box-open text-4xl"></i>
+            <p class="text-sm font-bold">Hozircha mahsulotlar mavjud emas.</p>
+            <button onclick="resetProductsToDefault()" class="mt-2 px-4 py-2 rounded-xl bg-brand-600 text-white text-xs font-bold">Standart mahsulotlarni qaytarish</button>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = products.map(p => `
+        <div class="bg-stone-50/80 hover:bg-white rounded-3xl p-5 border border-stone-200/80 shadow-xs hover:shadow-md transition-all flex flex-col justify-between space-y-4">
+          <div class="space-y-3">
+            <div class="relative h-44 rounded-2xl overflow-hidden bg-stone-200">
+              <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?auto=format&fit=crop&w=600&q=80'">
+              <span class="absolute top-2.5 right-2.5 px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-stone-900/80 text-white backdrop-blur-xs">
+                ${p.tag || 'Sara'}
+              </span>
+            </div>
+
+            <div class="space-y-1.5">
+              <div class="flex items-center justify-between text-[11px] text-stone-400 font-semibold">
+                <span>${p.category || 'Parrandalar uchun'}</span>
+                <span class="text-brand-700 bg-brand-50 px-2 py-0.5 rounded font-bold">${p.unit || '1 kg'}</span>
+              </div>
+              <h4 class="font-extrabold text-stone-900 text-sm line-clamp-2 leading-snug">${p.name}</h4>
+              <p class="text-xs text-stone-500 line-clamp-2 leading-relaxed">${p.description || "Tavsif ko'rsatilmagan"}</p>
+            </div>
+
+            <!-- Tarkibi (Nimadan tashkil topganligi) -->
+            <div class="p-3 rounded-2xl bg-amber-50/70 border border-amber-200/60 text-xs text-amber-950 space-y-1">
+              <div class="flex items-center gap-1.5 font-bold text-[11px] text-amber-800">
+                <i class="fa-solid fa-wheat-awn"></i>
+                <span>Tarkibi (Nimadan tashkil topganligi):</span>
+              </div>
+              <p class="text-[11px] leading-relaxed text-amber-900/90 font-medium">
+                ${p.composition || "Tarkib ma'lumotlari kiritilmagan"}
+              </p>
+            </div>
+          </div>
+
+          <!-- Narx va Tugmalar -->
+          <div class="pt-3 border-t border-stone-200/80 flex items-center justify-between">
+            <div>
+              <span class="text-[10px] font-bold text-stone-400 block">Narxi:</span>
+              <span class="text-lg font-black text-brand-700">${formatPrice(p.price)}</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <button onclick="editProduct('${p.id}')" class="px-3.5 py-2 rounded-xl bg-brand-50 hover:bg-brand-100 text-brand-700 font-bold text-xs flex items-center gap-1.5 transition-colors">
+                <i class="fa-solid fa-pen-to-square"></i>
+                <span>Tahrirlash</span>
+              </button>
+              <button onclick="deleteProduct('${p.id}')" title="O'chirish" class="w-8 h-8 rounded-xl hover:bg-red-50 text-stone-400 hover:text-red-600 flex items-center justify-center transition-colors">
+                <i class="fa-solid fa-trash-can text-xs"></i>
+              </button>
+            </div>
           </div>
         </div>
       `).join('');
+    }
+
+    // Modalni ochish (Yangi mahsulot yoki tahrir)
+    function openProductModal(prodId = null) {
+      const modal = document.getElementById('productModal');
+      const form = document.getElementById('productEditForm');
+      const title = document.getElementById('productModalTitle');
+      form.reset();
+
+      if (prodId) {
+        const prod = products.find(p => p.id === prodId);
+        if (prod) {
+          title.textContent = "Mahsulotni tahrirlash";
+          document.getElementById('editProdId').value = prod.id;
+          document.getElementById('editProdName').value = prod.name || '';
+          document.getElementById('editProdPrice').value = prod.price || '';
+          document.getElementById('editProdUnit').value = prod.unit || '1 kg';
+          document.getElementById('editProdCategory').value = prod.category || '';
+          document.getElementById('editProdTag').value = prod.tag || '';
+          document.getElementById('editProdImage').value = prod.image || '';
+          document.getElementById('editProdDescription').value = prod.description || '';
+          document.getElementById('editProdComposition').value = prod.composition || '';
+          previewProductImage(prod.image);
+        }
+      } else {
+        title.textContent = "Yangi mahsulot qo'shish";
+        document.getElementById('editProdId').value = '';
+        document.getElementById('editProdUnit').value = '1 kg';
+        document.getElementById('editProdImage').value = 'images/kanareka-don.jpg';
+        previewProductImage('images/kanareka-don.jpg');
+      }
+
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeProductModal() {
+      const modal = document.getElementById('productModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function previewProductImage(url) {
+      const preview = document.getElementById('editProdImagePreview');
+      if (preview && url) {
+        preview.src = url.trim();
+      }
+    }
+
+    function editProduct(id) {
+      openProductModal(id);
+    }
+
+    // Saqlash (Yangi yoki tahrirlangan mahsulot)
+    async function handleSaveProduct(event) {
+      event.preventDefault();
+
+      const id = document.getElementById('editProdId').value;
+      const name = document.getElementById('editProdName').value.trim();
+      const price = parseFloat(document.getElementById('editProdPrice').value) || 0;
+      const unit = document.getElementById('editProdUnit').value.trim() || '1 kg';
+      const category = document.getElementById('editProdCategory').value.trim() || 'Barcha qushlar uchun';
+      const tag = document.getElementById('editProdTag').value.trim() || 'Sara';
+      const image = document.getElementById('editProdImage').value.trim() || 'images/kanareka-don.jpg';
+      const description = document.getElementById('editProdDescription').value.trim();
+      const composition = document.getElementById('editProdComposition').value.trim();
+
+      if (id) {
+        // Mavjud mahsulotni yangilash
+        const index = products.findIndex(p => p.id === id);
+        if (index !== -1) {
+          products[index] = {
+            ...products[index],
+            name,
+            price,
+            unit,
+            category,
+            tag,
+            image,
+            description,
+            composition
+          };
+        }
+      } else {
+        // Yangi mahsulot qo'shish
+        const newProd = {
+          id: 'prod-' + Date.now(),
+          name,
+          price,
+          unit,
+          category,
+          tag,
+          image,
+          description,
+          composition
+        };
+        products.push(newProd);
+      }
+
+      closeProductModal();
+      renderProducts();
+      await saveProducts();
+      alert("✅ Mahsulot muvaffaqiyatli saqlandi va saytda yangilandi!");
+    }
+
+    // Mahsulotni o'chirish
+    async function deleteProduct(id) {
+      const prod = products.find(p => p.id === id);
+      const name = prod ? prod.name : 'Ushbu mahsulot';
+      if (confirm(`Rostdan ham "${name}" mahsulotini o'chirmoqchimisiz?`)) {
+        products = products.filter(p => p.id !== id);
+        renderProducts();
+        await saveProducts();
+      }
+    }
+
+    // Standart mahsulotlarni qaytarish
+    async function resetProductsToDefault() {
+      if (confirm("Mahsulotlarni dastlabki standart (10 ta mahsulot) holatiga qaytarmoqchimisiz? Barcha o'zgartirishlar standart qiymatga o'tadi.")) {
+        products = [...PRODUCTS_LIST];
+        renderProducts();
+        await saveProducts();
+        alert("✅ Mahsulotlar standart holatiga qaytarildi!");
+      }
     }
   </script>
 
