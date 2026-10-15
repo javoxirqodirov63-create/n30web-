@@ -1353,27 +1353,24 @@
                           `💰 JAMI SUMMA: ${formatPrice(totalPrice)}\n` +
                           `⏰ Sana: ${new Date().toLocaleString('uz-UZ')}`;
 
-      let sentViaTelegram = false;
-
-      // If Telegram bot configured, send via API
-      if (TELEGRAM_CONFIG.botToken && TELEGRAM_CONFIG.chatId) {
-        try {
-          const url = `https://api.telegram.org/bot${TELEGRAM_CONFIG.botToken}/sendMessage`;
-          const response = await fetch(url, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              chat_id: TELEGRAM_CONFIG.chatId,
-              text: messageText,
-              parse_mode: 'HTML'
-            })
-          });
-          if (response.ok) {
-            sentViaTelegram = true;
-          }
-        } catch (err) {
-          console.error("Telegramga yuborishda xatolik:", err);
-        }
+      // Send order to Express backend /api/order which reads .env
+      try {
+        const response = await fetch('/api/order', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name,
+            phone,
+            fulfillment,
+            address,
+            items: cart,
+            totalPrice
+          })
+        });
+        const resData = await response.json();
+        console.log("Server buyurtma natijasi:", resData);
+      } catch (err) {
+        console.warn("Serverga yuborishda ogohlantirish:", err);
       }
 
       // Show Success Modal
