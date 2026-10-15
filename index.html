@@ -897,6 +897,7 @@
             <li><a href="#products" class="hover:text-white transition-colors">Mahsulotlar katalogi</a></li>
             <li><a href="#testimonials" class="hover:text-white transition-colors">Mijozlar fikrlari</a></li>
             <li><a href="#order" class="hover:text-white transition-colors">Buyurtma berish</a></li>
+            <li class="pt-2"><a href="admin.html" target="_blank" class="text-amber-400 hover:text-amber-300 font-bold transition-colors inline-flex items-center gap-1.5"><i class="fa-solid fa-lock text-xs"></i> Admin panel</a></li>
           </ul>
         </div>
 
@@ -1388,6 +1389,33 @@
       const modal = document.getElementById('successModal');
       modal.classList.remove('hidden');
       modal.classList.add('flex');
+
+      // Save order to localStorage for Admin Panel
+      try {
+        const newOrder = {
+          id: 'ORD-' + Math.floor(100000 + Math.random() * 900000),
+          name: name,
+          phone: phone,
+          fulfillment: fulfillment,
+          address: address,
+          items: cart.map(i => ({
+            id: i.id,
+            name: i.name,
+            price: i.price,
+            quantity: i.quantity,
+            unit: i.unit,
+            image: i.image
+          })),
+          totalPrice: totalPrice,
+          status: 'Yangi',
+          createdAt: new Date().toLocaleString('uz-UZ')
+        };
+        const currentOrders = JSON.parse(localStorage.getItem('ozuqadon_orders') || '[]');
+        currentOrders.unshift(newOrder);
+        localStorage.setItem('ozuqadon_orders', JSON.stringify(currentOrders));
+      } catch (err) {
+        console.error("Order localStorage save error:", err);
+      }
 
       // Reset form and cart
       document.getElementById('orderForm').reset();
