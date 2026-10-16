@@ -11,7 +11,7 @@ Hozirgi veb-saytning kuchli tomonlari:
 Amalga oshirilgan dizayn yangilanishlari (Visual & UX Upgrades):
 1. **Ranglar gammasi va estetika**: Yashil-kulrang ohanglar o'rniga zamonaviy organik e-tijorat (Forest Emerald `#047857`, Honey Amber `#d97706`, Warm Canvas `#faf8f5`) palitrasi o'rnatildi.
 2. **Hero Bo'limi**: Fon radial mesh gradienti bilan boyitildi, ishonch nishonlari (trust badges: ⭐ 4.9/5, 🌿 100% Tabiiy, ⚡ 24 soat yetkazish), suzuvchi kafolat qutilari va glowing tugmalar qo'shildi.
-3. **Afzalliklar (Why Choose Us)**: 4 ustunli afzalliklar bloki (3 bosqichli elash, 100% tabiiy vitaminlar, germetik xavfsiz qadoq, tezkor yetkazish) yaratildi.
+3. **Afzalliklar (Why Choose Us)**: Foydalanuvchi talabiga ko'ra "3 Bosqichli tozalash" kartasi olib tashlandi va 3 ta asosiy ustun qoldirildi (100% tabiiy vitaminlar, germetik xavfsiz qadoq, tezkor yetkazish).
 4. **Mahsulotlar Katalogi**:
    - Interaktiv toifalar filtrlari (tabs: `Barchasi`, `🦜 Qushlar ozuqasi`, `🕊️ Kaptarlar uchun`, `🐔 Parrandalar & Bedana`, `🌾 Don & Yormalar`).
    - Jonli qidiruv (Live Search Bar) - nom yoki tarkib bo'yicha darhol filtrlash.
