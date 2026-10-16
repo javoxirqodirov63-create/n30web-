@@ -407,7 +407,7 @@
       {
         id: 'prod-1',
         name: "Kanareka uchun maxsus sayrash ozuqasi",
-        price: 26000,
+        price: 38000,
         unit: "1 kg",
         image: "images/kanareka-don.jpg",
         tag: "Premium",
@@ -418,7 +418,7 @@
       {
         id: 'prod-2',
         name: "Amadinka qushlari uchun elangan don",
-        price: 22000,
+        price: 12000,
         unit: "1 kg",
         image: "images/amadinka-don.jpg",
         tag: "Tozalangan",
@@ -428,13 +428,13 @@
       },
       {
         id: 'prod-3',
-        name: "Kokil qushlari uchun mevali don aralashmasi",
-        price: 34000,
+        name: "Kokil qushlari uchun  don aralashmasi",
+        price: 120000,
         unit: "1 kg",
         image: "images/kokil-don.jpg",
         tag: "Mevali",
         category: "Qushlar ozuqasi",
-        description: "Pista, yer yong'oq, suli va quritilgan mevalar bilan boyitilgan to'yimli kokil ozuqasi.",
+        description: "Urug‘larning ulkan xilma-xilligi: 15 dan ortiq turli xil urug‘lar. Turli xil o‘t urug‘larini o‘z ichiga oladi. Qobig‘i tozalangan kungaboqar urug‘lari hamda mikrourug‘lar mavjud.",
         composition: "Kungaboqar pistasi (25%), Tozalangan suli (20%), Sariq/oq tariq (25%), Quritilgan mevalar (15%), Yong'oq (15%)"
       },
       {
@@ -538,9 +538,8 @@
       checkTelegramStatus();
     }
 
-    const API_BASE = (window.location.protocol === 'http:' || window.location.protocol === 'https:') && window.location.port === '3000'
-      ? ''
-      : 'http://localhost:3000';
+    const isLocalServer = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.port === '3000';
+    const API_BASE = isLocalServer ? '' : (window.location.protocol.startsWith('http') ? window.location.origin : 'http://localhost:3000');
 
     async function checkTelegramStatus() {
       const badge = document.getElementById('tgBadge');

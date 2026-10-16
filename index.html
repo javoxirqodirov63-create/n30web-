@@ -1061,7 +1061,7 @@
       {
         id: 'prod-1',
         name: "Kanareka uchun maxsus sayrash ozuqasi",
-        price: 26000,
+        price: 38000,
         unit: "1 kg",
         image: "images/kanareka-don.jpg",
         tag: "Premium",
@@ -1072,7 +1072,7 @@
       {
         id: 'prod-2',
         name: "Amadinka qushlari uchun elangan don",
-        price: 22000,
+        price: 12000,
         unit: "1 kg",
         image: "images/amadinka-don.jpg",
         tag: "Tozalangan",
@@ -1082,13 +1082,13 @@
       },
       {
         id: 'prod-3',
-        name: "Kokil qushlari uchun mevali don aralashmasi",
-        price: 34000,
+        name: "Kokil qushlari uchun  don aralashmasi",
+        price: 120000,
         unit: "1 kg",
         image: "images/kokil-don.jpg",
         tag: "Mevali",
         category: "Qushlar ozuqasi",
-        description: "Pista, yer yong'oq, suli va quritilgan mevalar bilan boyitilgan to'yimli kokil ozuqasi.",
+        description: "Urug‘larning ulkan xilma-xilligi: 15 dan ortiq turli xil urug‘lar. Turli xil o‘t urug‘larini o‘z ichiga oladi. Qobig‘i tozalangan kungaboqar urug‘lari hamda mikrourug‘lar mavjud.",
         composition: "Kungaboqar pistasi (25%), Tozalangan suli (20%), Sariq/oq tariq (25%), Quritilgan mevalar (15%), Yong'oq (15%)"
       },
       {
@@ -1174,26 +1174,43 @@
     let currentCategoryFilter = 'ALL';
     let currentSearchTerm = '';
 
-    // API manzilini aniqlash
-    const API_BASE_URL = (window.location.protocol === 'http:' || window.location.protocol === 'https:') && window.location.port === '3000'
-      ? ''
-      : 'http://localhost:3000';
-
-    // Mahsulotlarni yuklash (Server API -> localStorage -> Default)
+    // Mahsulotlarni yuklash (Server API -> products.json -> localStorage -> Default)
     async function loadStoreProducts() {
+      // 1-urinish: Node server API (/api/products)
       try {
-        const res = await fetch(`${API_BASE_URL}/api/products`);
-        const data = await res.json();
-        if (data.success && Array.isArray(data.products) && data.products.length > 0) {
-          storeProducts = data.products;
-          localStorage.setItem('ozuqadon_products', JSON.stringify(storeProducts));
-          renderStoreProducts();
-          return;
+        const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        const apiUrl = isLocal ? '/api/products' : (window.location.protocol.startsWith('http') ? `${window.location.origin}/api/products` : 'http://localhost:3000/api/products');
+        const res = await fetch(apiUrl);
+        if (res.ok) {
+          const data = await res.json();
+          if (data.success && Array.isArray(data.products) && data.products.length > 0) {
+            storeProducts = data.products;
+            localStorage.setItem('ozuqadon_products', JSON.stringify(storeProducts));
+            renderStoreProducts();
+            return;
+          }
         }
       } catch (e) {
-        console.warn("Serverdan mahsulotlarni yuklashda ogohlantirish:", e);
+        console.warn("Server API dan yuklashda ogohlantirish:", e);
       }
 
+      // 2-urinish: products.json statik fayli (Har qanday server yoki hostingda ishlaydi)
+      try {
+        const res = await fetch('products.json');
+        if (res.ok) {
+          const prods = await res.json();
+          if (Array.isArray(prods) && prods.length > 0) {
+            storeProducts = prods;
+            localStorage.setItem('ozuqadon_products', JSON.stringify(storeProducts));
+            renderStoreProducts();
+            return;
+          }
+        }
+      } catch (e) {
+        console.warn("products.json faylidan yuklashda ogohlantirish:", e);
+      }
+
+      // 3-urinish: Brauzer localStorage xotirasi
       const saved = localStorage.getItem('ozuqadon_products');
       if (saved) {
         try {
@@ -1206,6 +1223,7 @@
         } catch(e) {}
       }
 
+      // 4-urinish: Standart mahsulotlar
       storeProducts = [...DEFAULT_PRODUCTS];
       renderStoreProducts();
     }
@@ -1766,9 +1784,8 @@
                                     `⏰ Sana: ${new Date().toLocaleString('uz-UZ')}`;
 
       // 1-bosqich: Express backend serveriga yuborish (/api/order)
-      const apiEndpoint = (window.location.protocol === 'http:' || window.location.protocol === 'https:') && window.location.port === '3000'
-        ? '/api/order'
-        : 'http://localhost:3000/api/order';
+      const isLocalServer = (window.location.protocol === 'http:' || window.location.protocol === 'https:') && (window.location.port === '3000' || window.location.hostname === 'localhost');
+      const apiEndpoint = isLocalServer ? '/api/order' : (window.location.protocol.startsWith('http') ? `${window.location.origin}/api/order` : 'http://localhost:3000/api/order');
 
       let telegramDelivered = false;
       let telegramNotice = "";
