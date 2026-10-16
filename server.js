@@ -240,12 +240,16 @@ app.post('/api/products', (req, res) => {
   }
 });
 
-// Start Express Server
-app.listen(PORT, () => {
-  console.log(`===============================================`);
-  console.log(`🌾 Ozuqa-don serveri ishga tushdi:`);
-  console.log(`👉 http://localhost:${PORT}`);
-  console.log(`🔐 Admin: http://localhost:${PORT}/admin.html`);
-  console.log(`===============================================`);
-});
+// Export for Vercel Serverless & Start Server
+module.exports = app;
+
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`===============================================`);
+    console.log(`🌾 Ozuqa-don serveri ishga tushdi:`);
+    console.log(`👉 http://localhost:${PORT}`);
+    console.log(`🔐 Admin: http://localhost:${PORT}/admin.html`);
+    console.log(`===============================================`);
+  });
+}
 
