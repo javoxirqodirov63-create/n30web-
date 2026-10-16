@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: ozuqadon
+    runtime: node
+    plan: free
+    region: frankfurt
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: TELEGRAM_BOT_TOKEN
+        value: 8919348960:AAGI5FZcybafNEPM1FfOrtvDVkfdf4eNkyA
+      - key: TELEGRAM_CHAT_ID
+        value: 8957417494
+      - key: PORT
+        value: 10000
