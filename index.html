@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ozuqa-don — Qushlar va Parrandalar Uchun 100% Tabiiy Sara Ozuqalar</title>
-  <meta name="description" content="Ozuqa-don — toza, saralangan va vitaminlarga boy qushlar ozuqasi. To'ti, kanareka, amadinka, bedana va barcha parrandalar uchun tabiiy donlar. Butun O'zbekiston bo'ylab yetkazib berish.">
+  <title>Ozuqa-don — Parrandalar va Qushlar Uchun 100% Tabiiy Sara Ozuqalar</title>
+  <meta name="description" content="Ozuqa-don — qushlar va parrandalar uchun saralangan, changdan xoli va vitaminlarga boy tabiiy donlar. Butun O'zbekiston bo'ylab tezkor yetkazib berish.">
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -19,18 +19,28 @@
               200: '#bbf7d0',
               300: '#86efac',
               400: '#4ade80',
-              500: '#22c55e',
-              600: '#16a34a',
-              700: '#15803d',
-              800: '#166534',
-              900: '#14532d',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+              800: '#065f46',
+              900: '#064e3b',
             },
             amberBrand: {
               50: '#fffbeb',
               100: '#fef3c7',
+              200: '#fde68a',
+              300: '#fcd34d',
+              400: '#fbbf24',
               500: '#f59e0b',
               600: '#d97706',
+              700: '#b45309',
+              800: '#92400e',
             }
+          },
+          boxShadow: {
+            'glow-emerald': '0 10px 30px -5px rgba(5, 150, 105, 0.3)',
+            'glow-amber': '0 10px 30px -5px rgba(245, 158, 11, 0.3)',
+            'card-hover': '0 20px 35px -10px rgba(0, 0, 0, 0.08), 0 1px 3px 0 rgba(0, 0, 0, 0.05)',
           }
         }
       }
@@ -40,18 +50,30 @@
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
+  <!-- Canvas Confetti CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap');
+    
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #faf8f5;
     }
-    .highlight-input {
-      animation: highlightPulse 1.5s ease-in-out;
+
+    /* Soft grain background effect */
+    .bg-canvas {
+      background-color: #faf8f5;
     }
-    @keyframes highlightPulse {
-      0%, 100% { background-color: #ffffff; border-color: #22c55e; }
-      50% { background-color: #dcfce7; border-color: #16a34a; transform: scale(1.02); }
+    
+    /* Mesh Gradients */
+    .hero-mesh {
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.12) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(245, 158, 11, 0.12) 0px, transparent 50%),
+        radial-gradient(at 50% 100%, rgba(5, 150, 105, 0.08) 0px, transparent 50%);
     }
+
     .badge-bounce {
       animation: badgeBounce 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
@@ -59,145 +81,204 @@
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.4); }
     }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1ede6;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+
+    /* Line clamps */
+    .line-clamp-1 {
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .line-clamp-2 {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
   </style>
 </head>
-<body class="bg-stone-50 text-stone-800 antialiased selection:bg-brand-500 selection:text-white">
+<body class="bg-canvas text-stone-800 antialiased selection:bg-brand-500 selection:text-white flex flex-col min-h-screen">
+
+  <!-- ==================== TOP ANNOUNCEMENT BAR ==================== -->
+  <div class="bg-gradient-to-r from-brand-900 via-brand-800 to-amberBrand-800 text-white text-xs py-2 px-4 border-b border-brand-700/50">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-1.5 text-center sm:text-left">
+      <div class="flex items-center gap-2 font-medium tracking-wide">
+        <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-amber-400 text-stone-900 text-[10px] font-black">★</span>
+        <span>100% Tabiiy, 3 bosqichda elangan va changdan xoli sara don mahsulotlari</span>
+      </div>
+      <div class="flex items-center gap-4 text-stone-200 text-[11px]">
+        <span class="hidden md:inline-flex items-center gap-1.5">
+          <i class="fa-solid fa-truck-fast text-amber-300"></i> O'zbekiston bo'ylab tezkor yetkazish
+        </span>
+        <a href="tel:+998901234567" class="hover:text-white font-bold text-amber-300 transition-colors inline-flex items-center gap-1">
+          <i class="fa-solid fa-phone"></i> +998 90 123-45-67
+        </a>
+      </div>
+    </div>
+  </div>
+
 
   <!-- ==================== HEADER / NAVBAR ==================== -->
-  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-stone-200 transition-all duration-300 shadow-sm">
+  <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-xl border-b border-stone-200/80 transition-all duration-300 shadow-xs">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-20">
+        
         <!-- Logo -->
-        <a href="#" class="flex items-center gap-3 group">
-          <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-brand-700 to-brand-500 flex items-center justify-center text-white text-2xl shadow-md shadow-brand-500/20 group-hover:scale-105 transition-transform">
+        <a href="#" class="flex items-center gap-3.5 group">
+          <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-brand-800 via-brand-600 to-amberBrand-500 flex items-center justify-center text-white text-2xl shadow-md shadow-brand-600/25 group-hover:scale-105 group-hover:rotate-3 transition-all duration-300">
             🌾
           </div>
           <div>
-            <span class="text-2xl font-black tracking-tight text-stone-900 group-hover:text-brand-700 transition-colors">Ozuqa-don</span>
-            <span class="block text-xs font-semibold text-brand-600 tracking-wider uppercase">Tabiiy & Saralangan</span>
+            <div class="flex items-center gap-2">
+              <span class="text-2xl font-black tracking-tight text-stone-900 group-hover:text-brand-700 transition-colors">Ozuqa-don</span>
+              <span class="hidden sm:inline-block px-2 py-0.5 rounded-md bg-brand-50 border border-brand-200 text-brand-700 text-[10px] font-black uppercase tracking-wider">ECO</span>
+            </div>
+            <span class="block text-[11px] font-bold text-brand-600 tracking-wider uppercase">Parrandalar & Qushlar Uchun</span>
           </div>
         </a>
 
         <!-- Desktop Navigation -->
-        <nav class="hidden md:flex items-center gap-8 font-semibold text-stone-600">
-          <a href="#about" class="hover:text-brand-600 transition-colors">Biz haqimizda</a>
-          <a href="#products" class="hover:text-brand-600 transition-colors">Mahsulotlar</a>
-          <a href="#testimonials" class="hover:text-brand-600 transition-colors">Mijozlar fikri</a>
-          <a href="#order" class="hover:text-brand-600 transition-colors">Buyurtma</a>
+        <nav class="hidden lg:flex items-center gap-8 font-semibold text-stone-600 text-sm">
+          <a href="#about" class="hover:text-brand-600 transition-colors py-1 relative after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-0.5 after:bg-brand-600 after:transition-all">Biz haqimizda</a>
+          <a href="#benefits" class="hover:text-brand-600 transition-colors py-1 relative after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-0.5 after:bg-brand-600 after:transition-all">Afzalliklar</a>
+          <a href="#products" class="hover:text-brand-600 transition-colors py-1 relative after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-0.5 after:bg-brand-600 after:transition-all">Mahsulotlar</a>
+          <a href="#testimonials" class="hover:text-brand-600 transition-colors py-1 relative after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-0.5 after:bg-brand-600 after:transition-all">Mijozlar fikri</a>
+          <a href="#faq" class="hover:text-brand-600 transition-colors py-1 relative after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-0.5 after:bg-brand-600 after:transition-all">Savol-Javob</a>
         </nav>
 
         <!-- Right Action Button & Cart -->
         <div class="hidden sm:flex items-center gap-3">
-          <a href="tel:+998901234567" class="flex items-center gap-2 text-stone-700 font-bold text-sm hover:text-brand-600 transition-colors pr-2">
-            <span class="w-8 h-8 rounded-full bg-brand-50 text-brand-600 flex items-center justify-center text-xs">
-              <i class="fa-solid fa-phone"></i>
-            </span>
-            <span class="hidden lg:inline">+998 90 123-45-67</span>
+          <!-- Direct Call pill -->
+          <a href="tel:+998901234567" class="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-700 font-bold text-xs transition-colors">
+            <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+            <span class="hidden xl:inline">+998 90 123-45-67</span>
+            <span class="xl:hidden"><i class="fa-solid fa-phone"></i></span>
           </a>
 
           <!-- Cart Button in Navbar -->
-          <button onclick="toggleCartDrawer(true)" class="relative flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-900 font-extrabold text-sm border border-amber-200/80 shadow-sm transition-all active:scale-95 group">
-            <i class="fa-solid fa-cart-shopping text-amber-600 text-base group-hover:scale-110 transition-transform"></i>
+          <button onclick="toggleCartDrawer(true)" class="relative flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-amberBrand-50 hover:bg-amberBrand-100 text-amberBrand-900 font-extrabold text-sm border border-amberBrand-200/90 shadow-xs transition-all active:scale-95 group">
+            <i class="fa-solid fa-cart-shopping text-amberBrand-600 text-base group-hover:scale-110 transition-transform"></i>
             <span>Savatcha</span>
-            <span id="navCartBadge" class="bg-brand-600 text-white text-xs px-2 py-0.5 rounded-full font-black min-w-[20px] text-center">0</span>
+            <span id="navCartBadge" class="bg-brand-600 text-white text-xs px-2 py-0.5 rounded-full font-black min-w-[20px] text-center shadow-xs">0</span>
           </button>
 
-          <a href="#order" class="px-5 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm shadow-md shadow-brand-600/30 hover:shadow-lg transition-all active:scale-95">
-            Buyurtma berish
+          <!-- Order Link CTA -->
+          <a href="#order" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-brand-700 to-brand-600 hover:from-brand-800 hover:to-brand-700 text-white font-extrabold text-sm shadow-md shadow-brand-600/25 hover:shadow-glow-emerald transition-all active:scale-95 flex items-center gap-2">
+            <span>Buyurtma</span>
+            <i class="fa-solid fa-arrow-down text-xs"></i>
           </a>
         </div>
 
         <!-- Mobile Buttons (Cart + Menu) -->
-        <div class="flex items-center gap-2 md:hidden">
-          <button onclick="toggleCartDrawer(true)" class="relative p-2.5 rounded-xl bg-amber-50 text-amber-800 border border-amber-200 font-bold text-sm flex items-center justify-center">
-            <i class="fa-solid fa-cart-shopping text-base text-amber-600"></i>
+        <div class="flex items-center gap-2 sm:hidden">
+          <button onclick="toggleCartDrawer(true)" class="relative p-2.5 rounded-xl bg-amberBrand-50 text-amberBrand-900 border border-amberBrand-200 font-bold text-sm flex items-center justify-center">
+            <i class="fa-solid fa-cart-shopping text-base text-amberBrand-600"></i>
             <span id="mobileNavCartBadge" class="absolute -top-1.5 -right-1.5 bg-brand-600 text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center font-black shadow-sm">0</span>
           </button>
-          <button id="mobileMenuBtn" class="p-2.5 rounded-xl text-stone-700 hover:bg-stone-100 focus:outline-none">
+          <button id="mobileMenuBtn" aria-label="Menu" class="p-2.5 rounded-xl text-stone-700 hover:bg-stone-100 focus:outline-none">
             <i class="fa-solid fa-bars text-xl"></i>
           </button>
         </div>
       </div>
 
       <!-- Mobile Dropdown Menu -->
-      <div id="mobileMenu" class="hidden md:hidden pb-6 pt-2 border-t border-stone-100 flex flex-col gap-4">
-        <a href="#about" class="mobile-link text-stone-700 font-medium py-1">Biz haqimizda</a>
-        <a href="#products" class="mobile-link text-stone-700 font-medium py-1">Mahsulotlar</a>
-        <a href="#testimonials" class="mobile-link text-stone-700 font-medium py-1">Mijozlar fikri</a>
-        <a href="#order" class="mobile-link text-stone-700 font-medium py-1">Buyurtma berish</a>
-        <button onclick="toggleCartDrawer(true); document.getElementById('mobileMenu').classList.add('hidden');" class="w-full text-left py-2 font-bold text-amber-900 bg-amber-50 rounded-xl px-3 flex items-center justify-between">
-          <span class="flex items-center gap-2"><i class="fa-solid fa-cart-shopping text-amber-600"></i> Savatchani ko'rish</span>
+      <div id="mobileMenu" class="hidden lg:hidden pb-6 pt-3 border-t border-stone-100 flex flex-col gap-3">
+        <a href="#about" class="mobile-link text-stone-700 font-medium py-1.5 px-2 rounded-lg hover:bg-stone-50">Biz haqimizda</a>
+        <a href="#benefits" class="mobile-link text-stone-700 font-medium py-1.5 px-2 rounded-lg hover:bg-stone-50">Afzalliklar</a>
+        <a href="#products" class="mobile-link text-stone-700 font-medium py-1.5 px-2 rounded-lg hover:bg-stone-50">Mahsulotlar katalogi</a>
+        <a href="#testimonials" class="mobile-link text-stone-700 font-medium py-1.5 px-2 rounded-lg hover:bg-stone-50">Mijozlar fikri</a>
+        <a href="#faq" class="mobile-link text-stone-700 font-medium py-1.5 px-2 rounded-lg hover:bg-stone-50">Savol-Javob</a>
+        <a href="#order" class="mobile-link text-stone-700 font-medium py-1.5 px-2 rounded-lg hover:bg-stone-50">Buyurtma berish</a>
+        
+        <button onclick="toggleCartDrawer(true); document.getElementById('mobileMenu').classList.add('hidden');" class="w-full text-left py-2.5 font-bold text-amberBrand-900 bg-amberBrand-50 rounded-xl px-4 flex items-center justify-between border border-amberBrand-200/60 mt-1">
+          <span class="flex items-center gap-2"><i class="fa-solid fa-cart-shopping text-amberBrand-600"></i> Savatchani ko'rish</span>
           <span id="mobileMenuCartCount" class="bg-brand-600 text-white text-xs px-2.5 py-0.5 rounded-full font-bold">0 ta</span>
         </button>
-        <div class="pt-2 flex flex-col gap-2">
-          <a href="tel:+998901234567" class="text-center py-2 font-bold text-brand-700 bg-brand-50 rounded-xl">
-            📞 +998 90 123-45-67
-          </a>
-        </div>
+
+        <a href="tel:+998901234567" class="text-center py-2.5 font-bold text-brand-800 bg-brand-50 border border-brand-200/60 rounded-xl text-sm mt-1">
+          📞 +998 90 123-45-67
+        </a>
       </div>
     </div>
   </header>
 
 
   <!-- ==================== FLOATING QUICK CART BUTTON ==================== -->
-  <button id="floatingCartBtn" onclick="toggleCartDrawer(true)" class="fixed bottom-6 right-6 z-30 p-4 rounded-full bg-gradient-to-tr from-brand-700 via-brand-600 to-amber-500 text-white shadow-2xl hover:scale-110 active:scale-95 transition-all flex items-center justify-center group focus:outline-none ring-4 ring-white/80">
-    <div class="relative">
-      <i class="fa-solid fa-cart-shopping text-2xl group-hover:rotate-6 transition-transform"></i>
-      <span id="floatingCartBadge" class="absolute -top-3 -right-3 bg-red-500 text-white text-xs font-black w-6 h-6 rounded-full flex items-center justify-center border-2 border-white shadow-md">0</span>
+  <button id="floatingCartBtn" onclick="toggleCartDrawer(true)" class="fixed bottom-6 right-6 z-30 px-4 py-3.5 rounded-full bg-gradient-to-r from-brand-800 via-brand-600 to-amberBrand-600 text-white shadow-2xl hover:scale-105 active:scale-95 transition-all flex items-center justify-center group focus:outline-none ring-4 ring-white/90">
+    <div class="relative flex items-center justify-center">
+      <i class="fa-solid fa-basket-shopping text-xl group-hover:rotate-6 transition-transform"></i>
+      <span id="floatingCartBadge" class="absolute -top-3 -right-3.5 bg-red-500 text-white text-[11px] font-black w-5 h-5 rounded-full flex items-center justify-center border-2 border-white shadow-sm">0</span>
     </div>
-    <span class="hidden md:inline-block ml-3 font-extrabold text-sm pr-1">Savatcha</span>
+    <span class="ml-3 font-extrabold text-sm pr-1 hidden sm:inline-block">Savatcha</span>
   </button>
 
 
   <!-- ==================== 1-BO'LIM: HERO / KOMPANIYA HAQIDA ==================== -->
-  <section id="about" class="relative overflow-hidden pt-12 pb-20 lg:pt-20 lg:pb-28 bg-gradient-to-b from-brand-50/70 via-stone-50 to-stone-50">
+  <section id="about" class="relative overflow-hidden hero-mesh pt-12 pb-20 lg:pt-20 lg:pb-28 border-b border-stone-200/70">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid lg:grid-cols-12 gap-12 items-center">
+      <div class="grid lg:grid-cols-12 gap-12 lg:gap-14 items-center">
         
         <!-- Left Content -->
-        <div class="lg:col-span-7 space-y-8 text-center lg:text-left">
-          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-100/80 border border-brand-200 text-brand-800 text-xs sm:text-sm font-bold tracking-wide">
-            <span class="w-2 h-2 rounded-full bg-brand-600 animate-pulse"></span>
-            100% Tabiiy, elangan va changdan xoli ozuqalar
+        <div class="lg:col-span-7 space-y-7 text-center lg:text-left">
+          
+          <!-- Trust Pill -->
+          <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/80 backdrop-blur-md border border-brand-200 text-brand-900 text-xs sm:text-sm font-bold shadow-xs">
+            <span class="w-2.5 h-2.5 rounded-full bg-brand-500 animate-ping"></span>
+            <span>✨ 100% Tabiiy, elangan va changdan xoli sara donlar</span>
           </div>
 
-          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-stone-900 tracking-tight leading-[1.15]">
-            Qushlaringiz va parrandalaringiz uchun <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-700 via-brand-600 to-amber-600">100% tabiiy, toza</span> saralangan ozuqalar
+          <!-- Main Title -->
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-stone-900 tracking-tight leading-[1.12]">
+            Qushlaringiz uchun <br class="hidden sm:inline">
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-700 via-brand-600 to-amberBrand-600">
+              100% tabiiy, saralangan
+            </span> ozuqalar
           </h1>
 
-          <p class="text-lg sm:text-xl text-stone-600 max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed">
-            <strong class="font-bold text-stone-800">Ozuqa-don</strong> — qushlarning sog'lom o'sishi, yorqin patlari va baquvvat bo'lishi uchun kerakli barcha vitaminlarga boy sara don mahsulotlari.
+          <p class="text-base sm:text-lg lg:text-xl text-stone-600 max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed">
+            <strong class="font-bold text-stone-900">Ozuqa-don</strong> — sayroqi qushlar, to'tilar, bedana, kaptar va barcha parrandalarning sog'lom o'sishi, yorqin patlari va baquvvat bo'lishi uchun kerakli barcha vitaminlarga boy sara don mahsulotlari.
           </p>
 
-          <!-- 3 Ta Asosiy Afzallik (Cards) -->
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
-            <div class="p-4 rounded-2xl bg-white border border-stone-200/80 shadow-sm hover:shadow-md transition-shadow text-left">
-              <div class="text-2xl mb-2">🌾</div>
-              <h3 class="font-bold text-stone-900 text-sm">100% Toza Don</h3>
-              <p class="text-xs text-stone-500 mt-1">Chang va begona o't urug'laridan tozalangan sara don.</p>
+          <!-- Micro-Trust Stats -->
+          <div class="grid grid-cols-3 gap-3 pt-1 max-w-lg mx-auto lg:mx-0">
+            <div class="p-3.5 rounded-2xl bg-white/90 border border-stone-200/80 shadow-xs text-center">
+              <span class="block text-xl sm:text-2xl font-black text-brand-700">⭐ 4.9/5</span>
+              <span class="text-[11px] font-semibold text-stone-500">Mijozlar bahosi</span>
             </div>
-
-            <div class="p-4 rounded-2xl bg-white border border-stone-200/80 shadow-sm hover:shadow-md transition-shadow text-left">
-              <div class="text-2xl mb-2">🚚</div>
-              <h3 class="font-bold text-stone-900 text-sm">Tezkor Yetkazish</h3>
-              <p class="text-xs text-stone-500 mt-1">O'zbekiston bo'ylab qulay va tezkor yetkazib berish xizmati.</p>
+            <div class="p-3.5 rounded-2xl bg-white/90 border border-stone-200/80 shadow-xs text-center">
+              <span class="block text-xl sm:text-2xl font-black text-amberBrand-600">🌿 100%</span>
+              <span class="text-[11px] font-semibold text-stone-500">Toza & Tabiiy</span>
             </div>
-
-            <div class="p-4 rounded-2xl bg-white border border-stone-200/80 shadow-sm hover:shadow-md transition-shadow text-left">
-              <div class="text-2xl mb-2">💰</div>
-              <h3 class="font-bold text-stone-900 text-sm">Hamyonbop Narx</h3>
-              <p class="text-xs text-stone-500 mt-1">To'g'ridan-to'g'ri ishlab chiqaruvchidan birinchi qo'l narxlar.</p>
+            <div class="p-3.5 rounded-2xl bg-white/90 border border-stone-200/80 shadow-xs text-center">
+              <span class="block text-xl sm:text-2xl font-black text-stone-900">⚡ 24 soat</span>
+              <span class="text-[11px] font-semibold text-stone-500">Tez yetkazish</span>
             </div>
           </div>
 
           <!-- Action Buttons -->
-          <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
-            <a href="#products" class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-brand-600 hover:bg-brand-700 text-white font-black text-base shadow-lg shadow-brand-600/30 hover:shadow-xl transition-all flex items-center justify-center gap-3">
+          <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+            <a href="#products" class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-gradient-to-r from-brand-700 via-brand-600 to-brand-500 hover:from-brand-800 hover:to-brand-600 text-white font-black text-base shadow-lg shadow-brand-600/30 hover:shadow-glow-emerald hover:-translate-y-0.5 transition-all flex items-center justify-center gap-3">
               <span>Mahsulotlarni ko'rish</span>
-              <i class="fa-solid fa-arrow-down"></i>
+              <i class="fa-solid fa-arrow-down text-sm"></i>
             </a>
-            <button onclick="toggleCartDrawer(true)" class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-white hover:bg-stone-100 text-stone-800 font-bold text-base border border-stone-300 shadow-sm transition-all flex items-center justify-center gap-2">
-              <i class="fa-solid fa-cart-shopping text-brand-600"></i>
+            <button onclick="toggleCartDrawer(true)" class="w-full sm:w-auto px-7 py-4 rounded-2xl bg-white hover:bg-stone-50 text-stone-800 font-extrabold text-base border border-stone-200 shadow-xs hover:border-stone-300 transition-all flex items-center justify-center gap-2.5">
+              <i class="fa-solid fa-basket-shopping text-brand-600"></i>
               <span>Savatchani tekshirish</span>
             </button>
           </div>
@@ -206,21 +287,29 @@
         <!-- Right Visual Showcase -->
         <div class="lg:col-span-5 relative">
           <div class="relative mx-auto max-w-md lg:max-w-none">
-            <!-- Decorative Glow -->
-            <div class="absolute -top-10 -right-10 w-72 h-72 bg-amberBrand-100 rounded-full filter blur-3xl opacity-70"></div>
-            <div class="absolute -bottom-10 -left-10 w-72 h-72 bg-brand-200 rounded-full filter blur-3xl opacity-60"></div>
             
+            <!-- Ambient Glow -->
+            <div class="absolute -top-8 -right-8 w-64 h-64 bg-amberBrand-200 rounded-full filter blur-3xl opacity-60"></div>
+            <div class="absolute -bottom-8 -left-8 w-64 h-64 bg-brand-300 rounded-full filter blur-3xl opacity-50"></div>
+            
+            <!-- Image Card Container -->
             <div class="relative rounded-3xl overflow-hidden border-4 border-white shadow-2xl bg-white">
               <img src="images/kanareka-don.jpg" alt="Sara qushlar doni" class="w-full h-80 sm:h-96 object-cover object-center transform hover:scale-105 transition-transform duration-700">
               
-              <!-- Floating Badge -->
+              <!-- Floating Top Badge -->
+              <div class="absolute top-4 left-4 bg-white/95 backdrop-blur-md px-3.5 py-2 rounded-2xl border border-stone-200/80 shadow-md flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-brand-600 animate-pulse"></span>
+                <span class="text-xs font-black text-stone-900">3 Bosqichli Elash</span>
+              </div>
+
+              <!-- Floating Bottom Guarantee Box -->
               <div class="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-md p-4 rounded-2xl border border-stone-200/80 shadow-lg flex items-center gap-4">
-                <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center text-xl shrink-0 font-bold">
-                  ⭐ 5.0
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-amberBrand-500 to-amberBrand-400 text-white flex items-center justify-center text-xl shrink-0 font-bold shadow-sm">
+                  🌾
                 </div>
                 <div>
                   <h4 class="font-extrabold text-stone-900 text-sm">Ozuqa-don Kafolati</h4>
-                  <p class="text-xs text-stone-500">Mijozlarimiz va qushlar tanlovi bo'yicha №1 ozuqa</p>
+                  <p class="text-xs text-stone-500">Mijozlar va qush ixlosmandlari tanlagan №1 toza ozuqa</p>
                 </div>
               </div>
             </div>
@@ -232,21 +321,124 @@
   </section>
 
 
-  <!-- ==================== 2-BO'LIM: MAHSULOTLAR KATALOGI (10 TA TUR) ==================== -->
-  <section id="products" class="py-20 bg-stone-100/70 border-t border-stone-200">
+  <!-- ==================== AFZALLIKLAR: NEGA AYNAN BIZ? ==================== -->
+  <section id="benefits" class="py-16 bg-white border-b border-stone-200/70">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-12 space-y-3">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-brand-50 border border-brand-200 text-brand-800 text-xs font-bold uppercase tracking-wider">
+          Bizning Afzalliklarimiz
+        </div>
+        <h2 class="text-3xl font-black text-stone-900 tracking-tight">
+          Nega aynan Ozuqa-don mahsulotlari?
+        </h2>
+        <p class="text-stone-600 text-sm sm:text-base">
+          Biz parrandalar va qushlar salomatligini har narsadan ustun qo'yamiz.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <!-- Pillar 1 -->
+        <div class="p-6 rounded-3xl bg-stone-50 border border-stone-200/80 hover:border-brand-300 hover:shadow-card-hover transition-all group">
+          <div class="w-12 h-12 rounded-2xl bg-brand-100 text-brand-700 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+            🌾
+          </div>
+          <h3 class="font-extrabold text-stone-900 text-base mb-2">3 Bosqichli tozalash</h3>
+          <p class="text-xs text-stone-600 leading-relaxed">
+            Donlar chang, xashak va begona o'tlardan maxsus uskunada 3 marta elanadi va tozalanadi.
+          </p>
+        </div>
+
+        <!-- Pillar 2 -->
+        <div class="p-6 rounded-3xl bg-stone-50 border border-stone-200/80 hover:border-amberBrand-300 hover:shadow-card-hover transition-all group">
+          <div class="w-12 h-12 rounded-2xl bg-amberBrand-100 text-amberBrand-700 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+            🧪
+          </div>
+          <h3 class="font-extrabold text-stone-900 text-base mb-2">100% Tabiiy vitaminlar</h3>
+          <p class="text-xs text-stone-600 leading-relaxed">
+            Kimyoviy qo'shimchasiz, konservantlarsiz faqat tabiiy vitamin va minerallar bilan to'yintirilgan.
+          </p>
+        </div>
+
+        <!-- Pillar 3 -->
+        <div class="p-6 rounded-3xl bg-stone-50 border border-stone-200/80 hover:border-brand-300 hover:shadow-card-hover transition-all group">
+          <div class="w-12 h-12 rounded-2xl bg-brand-100 text-brand-700 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+            📦
+          </div>
+          <h3 class="font-extrabold text-stone-900 text-base mb-2">Germetik xavfsiz qadoq</h3>
+          <p class="text-xs text-stone-600 leading-relaxed">
+            Namlik, chang va zararkunandalar kirmasligi uchun gigiyenik va mustahkam qadoqlangan.
+          </p>
+        </div>
+
+        <!-- Pillar 4 -->
+        <div class="p-6 rounded-3xl bg-stone-50 border border-stone-200/80 hover:border-amberBrand-300 hover:shadow-card-hover transition-all group">
+          <div class="w-12 h-12 rounded-2xl bg-amberBrand-100 text-amberBrand-700 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+            🚚
+          </div>
+          <h3 class="font-extrabold text-stone-900 text-base mb-2">Tezkor yetkazish</h3>
+          <p class="text-xs text-stone-600 leading-relaxed">
+            Toshkent bo'ylab va barcha viloyatlarga qulay yetkazib berish xizmati yo'lga qo'yilgan.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ==================== 2-BO'LIM: MAHSULOTLAR KATALOGI ==================== -->
+  <section id="products" class="py-20 bg-canvas border-b border-stone-200/70">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <!-- Section Header -->
-      <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-100 text-brand-800 text-xs font-bold uppercase tracking-wider">
-          Mahsulotlarimiz
+      <div class="text-center max-w-3xl mx-auto mb-10 space-y-3">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-brand-100 text-brand-800 text-xs font-bold uppercase tracking-wider">
+          Mahsulotlar Katalogi
         </div>
         <h2 class="text-3xl sm:text-4xl font-black text-stone-900 tracking-tight">
-          Parrandalar va qushlar uchun eng sara mahsulotlar
+          Parrandalar va qushlar uchun eng sara ozuqalar
         </h2>
-        <p class="text-stone-600 text-base sm:text-lg">
-          O'zingizga ma'qul kelgan mahsulotlarni tanlab, <strong>"Savatchaga qo'shish"</strong> tugmasini bosing.
+        <p class="text-stone-600 text-sm sm:text-base">
+          O'zingizga ma'qul toifani tanlang yoki qidiring, so'ngra <strong>"Savatchaga qo'shish"</strong> tugmasini bosing.
         </p>
+      </div>
+
+      <!-- Category Filter Tabs & Live Search -->
+      <div class="mb-10 space-y-4">
+        
+        <!-- Filter Tabs (Pills) -->
+        <div class="flex items-center justify-center gap-2 flex-wrap">
+          <button onclick="setCategoryFilter('ALL')" id="filterBtn-ALL" class="category-filter-btn px-4 py-2 rounded-2xl text-xs sm:text-sm font-extrabold transition-all bg-brand-700 text-white shadow-xs">
+            Barchasi (Hammasi)
+          </button>
+          <button onclick="setCategoryFilter('qushlar')" id="filterBtn-qushlar" class="category-filter-btn px-4 py-2 rounded-2xl text-xs sm:text-sm font-bold transition-all bg-white hover:bg-stone-100 text-stone-700 border border-stone-200">
+            🦜 Qushlar ozuqasi
+          </button>
+          <button onclick="setCategoryFilter('kaptar')" id="filterBtn-kaptar" class="category-filter-btn px-4 py-2 rounded-2xl text-xs sm:text-sm font-bold transition-all bg-white hover:bg-stone-100 text-stone-700 border border-stone-200">
+            🕊️ Kaptarlar uchun
+          </button>
+          <button onclick="setCategoryFilter('parranda')" id="filterBtn-parranda" class="category-filter-btn px-4 py-2 rounded-2xl text-xs sm:text-sm font-bold transition-all bg-white hover:bg-stone-100 text-stone-700 border border-stone-200">
+            🐔 Parrandalar & Bedana
+          </button>
+          <button onclick="setCategoryFilter('don')" id="filterBtn-don" class="category-filter-btn px-4 py-2 rounded-2xl text-xs sm:text-sm font-bold transition-all bg-white hover:bg-stone-100 text-stone-700 border border-stone-200">
+            🌾 Don & Yormalar
+          </button>
+        </div>
+
+        <!-- Live Search Input -->
+        <div class="max-w-md mx-auto relative">
+          <span class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-stone-400">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </span>
+          <input type="text" id="productSearchInput" oninput="handleSearchProducts(this.value)" placeholder="Mahsulot nomi yoki tarkibi bo'yicha qidirish..." class="w-full pl-11 pr-10 py-3 rounded-2xl bg-white border border-stone-200 text-stone-800 text-xs sm:text-sm font-medium focus:outline-none focus:ring-2 focus:ring-brand-500 shadow-xs">
+          <button id="clearSearchBtn" onclick="clearSearch()" class="hidden absolute inset-y-0 right-0 pr-4 flex items-center text-stone-400 hover:text-stone-600">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
       </div>
 
       <!-- Products Grid (Dinamik render qilinadi) -->
@@ -254,22 +446,34 @@
         <!-- JS orqali to'ldiriladi -->
       </div>
 
+      <!-- No Products Found Message -->
+      <div id="noProductsFoundNotice" class="hidden text-center py-12 space-y-3">
+        <div class="w-16 h-16 rounded-full bg-amberBrand-100 text-amberBrand-700 flex items-center justify-center text-2xl mx-auto">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+        <h4 class="font-extrabold text-stone-800 text-base">Hech qanday mahsulot topilmadi</h4>
+        <p class="text-xs text-stone-500">Iltimos, boshqa qidiruv so'zini kiriting yoki barcha toifalarni tanlang.</p>
+        <button onclick="clearSearch(); setCategoryFilter('ALL');" class="px-4 py-2 rounded-xl bg-brand-600 text-white font-bold text-xs">
+          Barcha mahsulotlarni ko'rsatish
+        </button>
+      </div>
+
     </div>
   </section>
 
 
   <!-- ==================== 3-BO'LIM: MIJOZLAR FIKRI (FEEDBACK / TESTIMONIALS) ==================== -->
-  <section id="testimonials" class="py-20 bg-white border-t border-stone-200">
+  <section id="testimonials" class="py-20 bg-white border-b border-stone-200/70">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
-      <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100 text-amber-800 text-xs font-bold uppercase tracking-wider">
-          Mijozlarimiz e'tirofi
+      <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amberBrand-100 text-amberBrand-800 text-xs font-bold uppercase tracking-wider">
+          Mijozlarimiz E'tirofi
         </div>
         <h2 class="text-3xl sm:text-4xl font-black text-stone-900 tracking-tight">
           Xaridorlarimiz biz haqimizda nima deyishadi?
         </h2>
-        <p class="text-stone-600 text-base sm:text-lg">
+        <p class="text-stone-600 text-sm sm:text-base">
           Doimiy mijozlarimiz va parrandachilik ixlosmandlarining samimiy fikrlari.
         </p>
       </div>
@@ -278,21 +482,26 @@
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
 
         <!-- Review 1 -->
-        <div class="bg-stone-50 p-6 rounded-3xl border border-stone-200/80 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
-          <div class="space-y-4">
-            <div class="flex text-amber-400 text-sm">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
+        <div class="bg-stone-50 p-6 rounded-3xl border border-stone-200/80 shadow-xs hover:shadow-card-hover transition-all flex flex-col justify-between">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <div class="flex text-amber-400 text-xs gap-1">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+              </div>
+              <span class="text-[10px] font-bold text-brand-700 bg-brand-50 px-2 py-0.5 rounded-full flex items-center gap-1">
+                <i class="fa-solid fa-circle-check text-[9px]"></i> Xaridor
+              </span>
             </div>
-            <p class="text-stone-700 text-sm leading-relaxed italic">
-              "Donlar juda toza, birorta chang yo'q. Qushlarim ishtaha bilan yeyapti, sayrashi ham ancha jonlandi. Rahmat sizlarga!"
+            <p class="text-stone-700 text-xs sm:text-sm leading-relaxed italic">
+              "Donlar juda toza, birorta chang yoki begona urug' yo'q. Kanarekalarim ishtaha bilan yeyapti, sayrashi ham ancha jonlandi. Rahmat!"
             </p>
           </div>
-          <div class="pt-6 border-t border-stone-200/60 mt-6 flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-brand-100 text-brand-800 font-black flex items-center justify-center text-sm">
+          <div class="pt-5 border-t border-stone-200/60 mt-6 flex items-center gap-3">
+            <div class="w-10 h-10 rounded-2xl bg-brand-100 text-brand-800 font-black flex items-center justify-center text-sm shadow-xs">
               A
             </div>
             <div>
@@ -303,46 +512,56 @@
         </div>
 
         <!-- Review 2 -->
-        <div class="bg-stone-50 p-6 rounded-3xl border border-stone-200/80 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
-          <div class="space-y-4">
-            <div class="flex text-amber-400 text-sm">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
+        <div class="bg-stone-50 p-6 rounded-3xl border border-stone-200/80 shadow-xs hover:shadow-card-hover transition-all flex flex-col justify-between">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <div class="flex text-amber-400 text-xs gap-1">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+              </div>
+              <span class="text-[10px] font-bold text-brand-700 bg-brand-50 px-2 py-0.5 rounded-full flex items-center gap-1">
+                <i class="fa-solid fa-circle-check text-[9px]"></i> Xaridor
+              </span>
             </div>
-            <p class="text-stone-700 text-sm leading-relaxed italic">
+            <p class="text-stone-700 text-xs sm:text-sm leading-relaxed italic">
               "Oldin boshqa joydan olar edim, changi ko'p bo'lardi. Ozuqa-dondan olganimdan keyin farqini darhol sezdim. Yetkazib berish ham tez ekan."
             </p>
           </div>
-          <div class="pt-6 border-t border-stone-200/60 mt-6 flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-amber-100 text-amber-800 font-black flex items-center justify-center text-sm">
+          <div class="pt-5 border-t border-stone-200/60 mt-6 flex items-center gap-3">
+            <div class="w-10 h-10 rounded-2xl bg-amberBrand-100 text-amberBrand-800 font-black flex items-center justify-center text-sm shadow-xs">
               R
             </div>
             <div>
               <h4 class="font-bold text-stone-900 text-sm">Rustamjon</h4>
-              <span class="text-xs text-stone-500">Toshkent · To'ti va bedana doni</span>
+              <span class="text-xs text-stone-500">Toshkent · To'ti va bedana</span>
             </div>
           </div>
         </div>
 
         <!-- Review 3 -->
-        <div class="bg-stone-50 p-6 rounded-3xl border border-stone-200/80 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
-          <div class="space-y-4">
-            <div class="flex text-amber-400 text-sm">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
+        <div class="bg-stone-50 p-6 rounded-3xl border border-stone-200/80 shadow-xs hover:shadow-card-hover transition-all flex flex-col justify-between">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <div class="flex text-amber-400 text-xs gap-1">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+              </div>
+              <span class="text-[10px] font-bold text-brand-700 bg-brand-50 px-2 py-0.5 rounded-full flex items-center gap-1">
+                <i class="fa-solid fa-circle-check text-[9px]"></i> Xaridor
+              </span>
             </div>
-            <p class="text-stone-700 text-sm leading-relaxed italic">
+            <p class="text-stone-700 text-xs sm:text-sm leading-relaxed italic">
               "Kaptarlarim uchun 7 xil don aralashmasini oldim. Har bir don saralangan. Narxi ham bozorga nisbatan ancha hamyonbop bo'ldi."
             </p>
           </div>
-          <div class="pt-6 border-t border-stone-200/60 mt-6 flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-brand-100 text-brand-800 font-black flex items-center justify-center text-sm">
+          <div class="pt-5 border-t border-stone-200/60 mt-6 flex items-center gap-3">
+            <div class="w-10 h-10 rounded-2xl bg-brand-100 text-brand-800 font-black flex items-center justify-center text-sm shadow-xs">
               D
             </div>
             <div>
@@ -353,21 +572,26 @@
         </div>
 
         <!-- Review 4 -->
-        <div class="bg-stone-50 p-6 rounded-3xl border border-stone-200/80 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
-          <div class="space-y-4">
-            <div class="flex text-amber-400 text-sm">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
+        <div class="bg-stone-50 p-6 rounded-3xl border border-stone-200/80 shadow-xs hover:shadow-card-hover transition-all flex flex-col justify-between">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <div class="flex text-amber-400 text-xs gap-1">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+              </div>
+              <span class="text-[10px] font-bold text-brand-700 bg-brand-50 px-2 py-0.5 rounded-full flex items-center gap-1">
+                <i class="fa-solid fa-circle-check text-[9px]"></i> Xaridor
+              </span>
             </div>
-            <p class="text-stone-700 text-sm leading-relaxed italic">
+            <p class="text-stone-700 text-xs sm:text-sm leading-relaxed italic">
               "Kokil qushlarim mevali aralashmani juda xush ko'rib yeyapti. Sifatiga gap yo'q, doimiy mijozingizga aylandim."
             </p>
           </div>
-          <div class="pt-6 border-t border-stone-200/60 mt-6 flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-amber-100 text-amber-800 font-black flex items-center justify-center text-sm">
+          <div class="pt-5 border-t border-stone-200/60 mt-6 flex items-center gap-3">
+            <div class="w-10 h-10 rounded-2xl bg-amberBrand-100 text-amberBrand-800 font-black flex items-center justify-center text-sm shadow-xs">
               J
             </div>
             <div>
@@ -383,12 +607,92 @@
   </section>
 
 
-  <!-- ==================== 4-BO'LIM: BOG'LANISH / BUYURTMA ANKETASI ==================== -->
-  <section id="order" class="py-20 bg-gradient-to-b from-stone-100/70 to-stone-200/50 border-t border-stone-200 relative">
+  <!-- ==================== FAQ: KO'P BERILADIGAN SAVOLLAR ==================== -->
+  <section id="faq" class="py-20 bg-canvas border-b border-stone-200/70">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-12 space-y-3">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-brand-100 text-brand-800 text-xs font-bold uppercase tracking-wider">
+          Savol-Javoblar
+        </div>
+        <h2 class="text-3xl font-black text-stone-900 tracking-tight">
+          Ko'p beriladigan savollar
+        </h2>
+        <p class="text-stone-600 text-sm">
+          Xaridorlarimiz tomonidan eng ko'p beriladigan savollarga aniq javoblar.
+        </p>
+      </div>
+
+      <div class="space-y-4">
+        
+        <!-- FAQ 1 -->
+        <div class="bg-white rounded-2xl border border-stone-200/80 p-5 shadow-xs transition-all">
+          <button onclick="toggleFaq(1)" class="w-full flex items-center justify-between text-left font-extrabold text-stone-900 text-base focus:outline-none">
+            <span class="flex items-center gap-3">
+              <span class="w-7 h-7 rounded-lg bg-brand-50 text-brand-700 flex items-center justify-center text-xs">1</span>
+              Buyurtma berish qanday amalga oshiriladi?
+            </span>
+            <i id="faqIcon-1" class="fa-solid fa-chevron-down text-stone-400 text-xs transition-transform"></i>
+          </button>
+          <div id="faqContent-1" class="hidden pt-3 text-xs sm:text-sm text-stone-600 leading-relaxed border-t border-stone-100 mt-3 pl-10">
+            Saytdan kerakli don va ozuqalarni "Savatchaga qo'shish" tugmasi orqali tanlaysiz. So'ngra buyurtma formasida ismingiz, telefon raqamingiz va manzilingizni qoldirasiz. 10 daqiqa ichida operatorimiz siz bilan bog'lanib buyurtmangizni tasdiqlaydi.
+          </div>
+        </div>
+
+        <!-- FAQ 2 -->
+        <div class="bg-white rounded-2xl border border-stone-200/80 p-5 shadow-xs transition-all">
+          <button onclick="toggleFaq(2)" class="w-full flex items-center justify-between text-left font-extrabold text-stone-900 text-base focus:outline-none">
+            <span class="flex items-center gap-3">
+              <span class="w-7 h-7 rounded-lg bg-brand-50 text-brand-700 flex items-center justify-center text-xs">2</span>
+              Yetkazib berish qancha vaqt oladi va qayerlarga yetkaziladi?
+            </span>
+            <i id="faqIcon-2" class="fa-solid fa-chevron-down text-stone-400 text-xs transition-transform"></i>
+          </button>
+          <div id="faqContent-2" class="hidden pt-3 text-xs sm:text-sm text-stone-600 leading-relaxed border-t border-stone-100 mt-3 pl-10">
+            Toshkent shahri bo'yicha buyurtmalar 24 soat ichida (kuryer orqali) manzilingizga yetkaziladi. Viloyatlarga esa BTS, pochtalar yoki taksi orqali 1-2 ish kunida yetkazib beriladi.
+          </div>
+        </div>
+
+        <!-- FAQ 3 -->
+        <div class="bg-white rounded-2xl border border-stone-200/80 p-5 shadow-xs transition-all">
+          <button onclick="toggleFaq(3)" class="w-full flex items-center justify-between text-left font-extrabold text-stone-900 text-base focus:outline-none">
+            <span class="flex items-center gap-3">
+              <span class="w-7 h-7 rounded-lg bg-brand-50 text-brand-700 flex items-center justify-center text-xs">3</span>
+              Donlar haqiqatan ham saralangan va tozalanganmi?
+            </span>
+            <i id="faqIcon-3" class="fa-solid fa-chevron-down text-stone-400 text-xs transition-transform"></i>
+          </button>
+          <div id="faqContent-3" class="hidden pt-3 text-xs sm:text-sm text-stone-600 leading-relaxed border-t border-stone-100 mt-3 pl-10">
+            Ha, albatta! Har bir don maxsus ko'p bosqichli elash apparatidan o'tadi. Qushlarning nafas yo'llariga zarar yetkazuvchi chang, xashak va mayda toshlar to'liq ajratib olinadi.
+          </div>
+        </div>
+
+        <!-- FAQ 4 -->
+        <div class="bg-white rounded-2xl border border-stone-200/80 p-5 shadow-xs transition-all">
+          <button onclick="toggleFaq(4)" class="w-full flex items-center justify-between text-left font-extrabold text-stone-900 text-base focus:outline-none">
+            <span class="flex items-center gap-3">
+              <span class="w-7 h-7 rounded-lg bg-brand-50 text-brand-700 flex items-center justify-center text-xs">4</span>
+              To'lovni qanday tartibda to'lasa bo'ladi?
+            </span>
+            <i id="faqIcon-4" class="fa-solid fa-chevron-down text-stone-400 text-xs transition-transform"></i>
+          </button>
+          <div id="faqContent-4" class="hidden pt-3 text-xs sm:text-sm text-stone-600 leading-relaxed border-t border-stone-100 mt-3 pl-10">
+            To'lovni mahsulotni qabul qilib olganingizdan so'ng naqd shaklda, Click yoki Payme ilovalari orqali xavfsiz amalga oshirishingiz mumkin.
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ==================== 4-BO'LIM: BUYURTMA RASMIYLASHTIRISH ==================== -->
+  <section id="order" class="py-20 bg-gradient-to-b from-stone-100/70 to-stone-200/40 relative">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <div class="text-center max-w-2xl mx-auto mb-12 space-y-3">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-100 text-brand-800 text-xs font-bold uppercase tracking-wider">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-brand-100 text-brand-800 text-xs font-bold uppercase tracking-wider">
           Murojaat va Buyurtma
         </div>
         <h2 class="text-3xl sm:text-4xl font-black text-stone-900 tracking-tight">
@@ -405,12 +709,12 @@
         <div class="lg:col-span-5 bg-white rounded-3xl p-6 sm:p-7 shadow-xl border border-stone-200/80 space-y-5">
           <div class="flex items-center justify-between pb-4 border-b border-stone-100">
             <h3 class="font-black text-stone-900 text-lg flex items-center gap-2.5">
-              <span class="w-8 h-8 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center text-sm">
+              <span class="w-8 h-8 rounded-xl bg-amberBrand-100 text-amberBrand-700 flex items-center justify-center text-sm shadow-xs">
                 <i class="fa-solid fa-basket-shopping"></i>
               </span>
               Buyurtma tarkibi
             </h3>
-            <button onclick="toggleCartDrawer(true)" class="text-xs font-bold text-brand-700 hover:text-brand-800 underline">
+            <button onclick="toggleCartDrawer(true)" class="text-xs font-extrabold text-brand-700 hover:text-brand-800 underline">
               Tahrirlash
             </button>
           </div>
@@ -437,20 +741,23 @@
           </div>
 
           <!-- Help prompt if cart is empty -->
-          <div id="checkoutEmptyNotice" class="hidden text-center py-4 bg-amber-50 rounded-2xl border border-amber-200/60 p-4">
-            <p class="text-xs text-amber-900 font-medium mb-3">Savatchangiz bo'sh. Mahsulotlar katalogidan o'zingizga yoqqanlarini tanlang.</p>
-            <a href="#products" class="inline-block px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs shadow-sm transition-all">
+          <div id="checkoutEmptyNotice" class="hidden text-center py-5 bg-amberBrand-50 rounded-2xl border border-amberBrand-200/60 p-4 space-y-3">
+            <div class="w-10 h-10 rounded-full bg-amberBrand-100 text-amberBrand-700 flex items-center justify-center text-lg mx-auto">
+              <i class="fa-solid fa-basket-shopping"></i>
+            </div>
+            <p class="text-xs text-amberBrand-900 font-medium">Savatchangiz bo'sh. Mahsulotlar katalogidan qushlaringiz uchun sara don tanlang.</p>
+            <a href="#products" class="inline-block px-4 py-2 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs shadow-xs transition-all">
               Katalogga o'tish
             </a>
           </div>
         </div>
 
         <!-- Right: Order Form Card -->
-        <div class="lg:col-span-7 bg-white rounded-3xl p-6 sm:p-10 shadow-xl border border-stone-200/80">
+        <div class="lg:col-span-7 bg-white rounded-3xl p-6 sm:p-9 shadow-xl border border-stone-200/80">
           
           <form id="orderForm" onsubmit="handleOrderSubmit(event)" class="space-y-6">
             
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <!-- Ism -->
               <div>
                 <label for="userName" class="block text-xs font-extrabold text-stone-700 uppercase tracking-wider mb-2">
@@ -497,7 +804,7 @@
                   <input type="radio" name="fulfillmentType" value="O'zim olib ketaman" onchange="handleFulfillmentChange(this.value)" class="text-brand-600 focus:ring-brand-500 h-4 w-4">
                   <div>
                     <div class="font-extrabold text-stone-900 text-xs sm:text-sm flex items-center gap-1.5">
-                      <i class="fa-solid fa-store text-amber-600"></i> O'zim olib ketaman
+                      <i class="fa-solid fa-store text-amberBrand-600"></i> O'zim olib ketaman
                     </div>
                     <span class="text-[11px] text-stone-500 block">Do'kon/omborxonadan</span>
                   </div>
@@ -507,14 +814,14 @@
 
             <!-- Manzil yoki qisqa izoh -->
             <div id="addressSectionWrapper">
-              <!-- Do'kondan olib ketish ma'lumot qutisi (faqat O'zim olib ketaman tanlanganda ko'rinadi) -->
-              <div id="pickupInfoBox" class="hidden mb-3 p-4 bg-amber-50 rounded-2xl border border-amber-200 text-xs text-amber-900 space-y-1">
-                <div class="flex items-center gap-2 font-bold text-amber-950">
-                  <i class="fa-solid fa-location-dot text-amber-600 text-sm"></i>
+              <!-- Do'kondan olib ketish ma'lumot qutisi -->
+              <div id="pickupInfoBox" class="hidden mb-3 p-4 bg-amberBrand-50 rounded-2xl border border-amberBrand-200 text-xs text-amberBrand-900 space-y-1">
+                <div class="flex items-center gap-2 font-bold text-amberBrand-950">
+                  <i class="fa-solid fa-location-dot text-amberBrand-600 text-sm"></i>
                   <span>Do'konimiz / Omborxona manzili:</span>
                 </div>
                 <p class="text-stone-700 pl-5">Toshkent shahar, Chilonzor tumani, Bunyodkor shoh ko'chasi, 42-uy.</p>
-                <p class="text-[11px] text-amber-800 pl-5">Ish vaqti: Dushanba — Shanba: 08:30 dan 19:00 gacha.</p>
+                <p class="text-[11px] text-amberBrand-800 pl-5">Ish vaqti: Dushanba — Shanba: 08:30 dan 19:00 gacha.</p>
               </div>
 
               <label id="userAddressLabel" for="userAddress" class="block text-xs font-extrabold text-stone-700 uppercase tracking-wider mb-2">
@@ -527,15 +834,15 @@
 
             <!-- Submit Button -->
             <div>
-              <button type="submit" id="submitBtn" class="w-full py-4 rounded-2xl bg-gradient-to-r from-brand-700 via-brand-600 to-brand-500 hover:from-brand-800 hover:to-brand-600 text-white font-black text-base shadow-lg shadow-brand-600/30 hover:shadow-xl transition-all flex items-center justify-center gap-3 active:scale-98">
+              <button type="submit" id="submitBtn" class="w-full py-4 rounded-2xl bg-gradient-to-r from-brand-700 via-brand-600 to-brand-500 hover:from-brand-800 hover:to-brand-600 text-white font-black text-base shadow-lg shadow-brand-600/30 hover:shadow-glow-emerald transition-all flex items-center justify-center gap-3 active:scale-98">
                 <i class="fa-solid fa-paper-plane"></i>
                 <span>Buyurtmani tasdiqlash</span>
               </button>
             </div>
 
-            <div class="flex items-center justify-center gap-6 text-xs text-stone-500 pt-2">
+            <div class="flex items-center justify-center gap-6 text-xs text-stone-500 pt-1">
               <span class="flex items-center gap-1.5"><i class="fa-solid fa-shield-halved text-brand-600"></i> Ma'lumotlar xavfsiz</span>
-              <span class="flex items-center gap-1.5"><i class="fa-solid fa-bolt text-amber-500"></i> 10 daqiqada aloqa</span>
+              <span class="flex items-center gap-1.5"><i class="fa-solid fa-bolt text-amberBrand-500"></i> 10 daqiqada aloqa</span>
             </div>
 
           </form>
@@ -549,13 +856,13 @@
 
 
   <!-- ==================== FOOTER ==================== -->
-  <footer class="bg-stone-900 text-stone-300 py-14 border-t border-stone-800">
+  <footer class="bg-stone-900 text-stone-300 py-14 border-t border-stone-800 mt-auto">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
         
         <div class="space-y-4 md:col-span-2">
           <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-xl bg-brand-600 flex items-center justify-center text-white text-xl">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-700 to-amberBrand-500 flex items-center justify-center text-white text-xl shadow-md">
               🌾
             </div>
             <span class="text-2xl font-black text-white">Ozuqa-don</span>
@@ -569,10 +876,11 @@
           <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-4">Bo'limlar</h4>
           <ul class="space-y-2 text-sm text-stone-400">
             <li><a href="#about" class="hover:text-white transition-colors">Biz haqimizda</a></li>
+            <li><a href="#benefits" class="hover:text-white transition-colors">Afzalliklar</a></li>
             <li><a href="#products" class="hover:text-white transition-colors">Mahsulotlar katalogi</a></li>
             <li><a href="#testimonials" class="hover:text-white transition-colors">Mijozlar fikrlari</a></li>
-            <li><a href="#order" class="hover:text-white transition-colors">Buyurtma berish</a></li>
-            <li class="pt-2"><a href="admin.html" target="_blank" class="text-amber-400 hover:text-amber-300 font-bold transition-colors inline-flex items-center gap-1.5"><i class="fa-solid fa-lock text-xs"></i> Admin panel</a></li>
+            <li><a href="#faq" class="hover:text-white transition-colors">Ko'p beriladigan savollar</a></li>
+            <li class="pt-2"><a href="admin.html" target="_blank" class="text-amberBrand-400 hover:text-amberBrand-300 font-bold transition-colors inline-flex items-center gap-1.5"><i class="fa-solid fa-lock text-xs"></i> Admin panel</a></li>
           </ul>
         </div>
 
@@ -581,7 +889,7 @@
           <ul class="space-y-2 text-sm text-stone-400">
             <li class="flex items-center gap-2"><i class="fa-solid fa-phone text-brand-400"></i> +998 90 123-45-67</li>
             <li class="flex items-center gap-2"><i class="fa-brands fa-telegram text-sky-400"></i> @ozuqadon_admin</li>
-            <li class="flex items-center gap-2"><i class="fa-solid fa-location-dot text-amber-400"></i> Toshkent, O'zbekiston</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-location-dot text-amberBrand-400"></i> Toshkent, O'zbekiston</li>
           </ul>
         </div>
 
@@ -589,7 +897,7 @@
 
       <div class="pt-8 border-t border-stone-800 text-center text-xs text-stone-500 flex flex-col sm:flex-row items-center justify-between gap-4">
         <p>&copy; 2026 Ozuqa-don. Barcha huquqlar himoyalangan.</p>
-        <p>Landing page n30web loyihasi asosida yaratildi.</p>
+        <p>Premium e-tijorat n30web loyihasi asosida yaratildi.</p>
       </div>
     </div>
   </footer>
@@ -601,9 +909,9 @@
   <div id="cartDrawer" class="fixed top-0 right-0 bottom-0 z-50 w-full max-w-md bg-white shadow-2xl flex flex-col transform translate-x-full transition-transform duration-300 ease-in-out">
     
     <!-- Drawer Header -->
-    <div class="p-5 sm:p-6 border-b border-stone-200 flex items-center justify-between bg-stone-50/80">
+    <div class="p-5 sm:p-6 border-b border-stone-200 flex items-center justify-between bg-stone-50/90">
       <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-2xl bg-amber-100 text-amber-800 flex items-center justify-center text-lg">
+        <div class="w-10 h-10 rounded-2xl bg-amberBrand-100 text-amberBrand-800 flex items-center justify-center text-lg shadow-xs">
           <i class="fa-solid fa-cart-shopping"></i>
         </div>
         <div>
@@ -614,6 +922,12 @@
       <button onclick="toggleCartDrawer(false)" class="w-9 h-9 rounded-xl hover:bg-stone-200 text-stone-500 hover:text-stone-800 flex items-center justify-center transition-colors">
         <i class="fa-solid fa-xmark text-lg"></i>
       </button>
+    </div>
+
+    <!-- Free Delivery Tip Box -->
+    <div class="px-5 py-3 bg-brand-50 border-b border-brand-100 text-xs text-brand-800 flex items-center gap-2 font-medium">
+      <i class="fa-solid fa-truck text-brand-600"></i>
+      <span>100 000 so'mdan ortiq xaridlarga maxsus maslahat va tezkor yetkazish!</span>
     </div>
 
     <!-- Drawer Items List -->
@@ -648,6 +962,53 @@
   </div>
 
 
+  <!-- ==================== QUICK VIEW MODAL (TEZKOR KO'RISH) ==================== -->
+  <div id="quickViewModal" class="fixed inset-0 z-50 bg-stone-900/60 backdrop-blur-sm hidden items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-8 space-y-6 shadow-2xl my-8 relative animate-fade-in">
+      <button onclick="closeQuickViewModal()" class="absolute top-5 right-5 w-9 h-9 rounded-xl hover:bg-stone-100 text-stone-400 hover:text-stone-700 flex items-center justify-center transition-colors">
+        <i class="fa-solid fa-xmark text-lg"></i>
+      </button>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+        <!-- Image -->
+        <div class="rounded-2xl overflow-hidden bg-stone-100 border border-stone-200">
+          <img id="qvImage" src="" alt="" class="w-full h-64 object-cover">
+        </div>
+
+        <!-- Info -->
+        <div class="space-y-4">
+          <div class="flex items-center gap-2">
+            <span id="qvCategory" class="text-xs font-bold text-stone-500 uppercase tracking-wider"></span>
+            <span id="qvTag" class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-amberBrand-500 text-white"></span>
+          </div>
+
+          <h3 id="qvName" class="text-xl font-black text-stone-900 leading-snug"></h3>
+          <p id="qvDescription" class="text-xs text-stone-600 leading-relaxed"></p>
+
+          <!-- Composition Details -->
+          <div class="p-3.5 rounded-2xl bg-amberBrand-50 border border-amberBrand-200/80 text-xs text-amberBrand-950 space-y-1">
+            <div class="flex items-center gap-1.5 font-bold text-[11px] text-amberBrand-800">
+              <i class="fa-solid fa-wheat-awn"></i>
+              <span>Mahsulot Tarkibi:</span>
+            </div>
+            <p id="qvComposition" class="text-[11px] leading-relaxed text-stone-700 font-medium"></p>
+          </div>
+
+          <div class="pt-2 flex items-baseline justify-between border-t border-stone-100">
+            <span class="text-xs text-stone-400 font-medium">Narxi:</span>
+            <span id="qvPrice" class="text-2xl font-black text-brand-700"></span>
+          </div>
+
+          <button id="qvAddToCartBtn" class="w-full py-3.5 rounded-2xl bg-brand-600 hover:bg-brand-700 text-white font-black text-sm shadow-md transition-all flex items-center justify-center gap-2">
+            <i class="fa-solid fa-cart-plus"></i>
+            <span>Savatchaga qo'shish</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
   <!-- ==================== TOAST NOTIFICATION ==================== -->
   <div id="toastNotification" class="fixed top-24 right-5 z-50 bg-stone-900 text-white px-5 py-3.5 rounded-2xl shadow-2xl border border-stone-700 flex items-center gap-3 transform translate-y-[-20px] opacity-0 pointer-events-none transition-all duration-300">
     <div class="w-8 h-8 rounded-xl bg-brand-500 text-white flex items-center justify-center text-sm shrink-0">
@@ -657,7 +1018,7 @@
       <h5 id="toastTitle" class="text-xs font-bold text-stone-100">Savatchaga qo'shildi!</h5>
       <p id="toastMessage" class="text-[11px] text-stone-400 max-w-xs truncate"></p>
     </div>
-    <button onclick="toggleCartDrawer(true)" class="ml-2 text-xs font-bold text-amber-400 hover:text-amber-300 underline shrink-0 pointer-events-auto">
+    <button onclick="toggleCartDrawer(true)" class="ml-2 text-xs font-bold text-amberBrand-400 hover:text-amberBrand-300 underline shrink-0 pointer-events-auto">
       Ko'rish
     </button>
   </div>
@@ -704,7 +1065,7 @@
         unit: "1 kg",
         image: "images/kanareka-don.jpg",
         tag: "Premium",
-        category: "Kanareykalar uchun",
+        category: "Qushlar ozuqasi",
         description: "Kanarekalarning jarangdor sayrashini ta'minlovchi raps, tariq va sara urug'lar aralashmasi.",
         composition: "Raps (30%), Kanareychik (25%), Sariq tariq (20%), Qizil tariq (15%), Oq kunjut va vitaminli premiks (10%)"
       },
@@ -715,7 +1076,7 @@
         unit: "1 kg",
         image: "images/amadinka-don.jpg",
         tag: "Tozalangan",
-        category: "Amadinlar uchun",
+        category: "Qushlar ozuqasi",
         description: "Amadinlar va mayda qushlar uchun maxsus saralangan mayda tariq va vitaminli donlar.",
         composition: "Mayda oq tariq (40%), Sariq tariq (30%), Qizil tariq (15%), Mogar (10%), Minerallar (5%)"
       },
@@ -726,7 +1087,7 @@
         unit: "1 kg",
         image: "images/kokil-don.jpg",
         tag: "Mevali",
-        category: "Kokil va To'tilar",
+        category: "Qushlar ozuqasi",
         description: "Pista, yer yong'oq, suli va quritilgan mevalar bilan boyitilgan to'yimli kokil ozuqasi.",
         composition: "Kungaboqar pistasi (25%), Tozalangan suli (20%), Sariq/oq tariq (25%), Quritilgan mevalar (15%), Yong'oq (15%)"
       },
@@ -737,7 +1098,7 @@
         unit: "1 kg",
         image: "images/bedana-don.jpg",
         tag: "Xaridorgir",
-        category: "Bedanalar uchun",
+        category: "Parrandalar & Bedana",
         description: "Bedanalar tuxum berishini 30% gacha oshiruvchi kalsiy va maydalangan dukkakli donlar.",
         composition: "Maydalangan makkajo'xori (35%), Bug'doy yormasi (30%), Mayda tariq (20%), Kalsiy/chig'anoq (10%), Soya (5%)"
       },
@@ -748,7 +1109,7 @@
         unit: "1 kg",
         image: "https://images.unsplash.com/photo-1598965675045-45c5e72c7d05?auto=format&fit=crop&w=600&q=80",
         tag: "Don",
-        category: "Barcha qushlar uchun",
+        category: "Don & Yormalar",
         description: "Chang va xashaklardan tozalangan, 1-navli yaltiroq sara oq tariq doni.",
         composition: "100% saralangan va tozalangan sara oq tariq doni (namlik 12% dan past)"
       },
@@ -770,7 +1131,7 @@
         unit: "1 kg",
         image: "https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?auto=format&fit=crop&w=600&q=80",
         tag: "Don",
-        category: "Parrandalar uchun",
+        category: "Don & Yormalar",
         description: "Namlikdan xoli, toza quruq va elangan bug'doy. Tovuq va parrandalar uchun tabiiy oziq.",
         composition: "100% sara tozalangan toza bug'doy doni (oqsil 12.5%+)"
       },
@@ -781,7 +1142,7 @@
         unit: "1 kg",
         image: "https://images.unsplash.com/photo-1551754655-cd27e38d2076?auto=format&fit=crop&w=600&q=80",
         tag: "Yorma",
-        category: "Parrandalar uchun",
+        category: "Parrandalar & Bedana",
         description: "Parrandalar tez semirishi va tuxum sarig'i to'q sariq bo'lishi uchun maydalangan sara jo'xori.",
         composition: "100% tabiiy sariq makkajo'xori yormasi (karotinga boy)"
       },
@@ -792,7 +1153,7 @@
         unit: "1 kg",
         image: "https://images.unsplash.com/photo-1612170153139-6f881ff067e0?auto=format&fit=crop&w=600&q=80",
         tag: "Don",
-        category: "Kaptar va To'tilar",
+        category: "Kaptarlar uchun",
         description: "Hazm qilish a'zolari faoliyatini normallashtiruvchi, vitaminlarga boy yumshoq suli doni.",
         composition: "100% yumshoq qobiqli saralangan suli doni (B-vitaminlar va kletchatka)"
       },
@@ -803,13 +1164,15 @@
         unit: "1 kg",
         image: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=600&q=80",
         tag: "Granula",
-        category: "Tuxum beruvchi tovuqlar",
+        category: "Parrandalar & Bedana",
         description: "Tuxumdorlikni yuqori darajada ushlab turuvchi kalsiy, oqsil va premiks bilan to'yintirilgan granula yem.",
         composition: "Bug'doy, makkajo'xori, shrot, baliq uni, kalsiy/bo'r (3.8%), vitamin-mineral premiksi"
       }
     ];
 
     let storeProducts = [];
+    let currentCategoryFilter = 'ALL';
+    let currentSearchTerm = '';
 
     // API manzilini aniqlash
     const API_BASE_URL = (window.location.protocol === 'http:' || window.location.protocol === 'https:') && window.location.port === '3000'
@@ -847,63 +1210,216 @@
       renderStoreProducts();
     }
 
-    // Mahsulotlar kartalarini dinamik render qilish (Tarkibi bilan!)
+    // Category filter controller
+    function setCategoryFilter(category) {
+      currentCategoryFilter = category;
+      
+      // Update button styling
+      document.querySelectorAll('.category-filter-btn').forEach(btn => {
+        btn.classList.remove('bg-brand-700', 'text-white', 'shadow-xs');
+        btn.classList.add('bg-white', 'text-stone-700', 'hover:bg-stone-100', 'border', 'border-stone-200');
+      });
+
+      const activeBtn = document.getElementById(`filterBtn-${category}`);
+      if (activeBtn) {
+        activeBtn.classList.remove('bg-white', 'text-stone-700', 'hover:bg-stone-100', 'border', 'border-stone-200');
+        activeBtn.classList.add('bg-brand-700', 'text-white', 'shadow-xs');
+      }
+
+      renderStoreProducts();
+    }
+
+    // Live search controller
+    function handleSearchProducts(term) {
+      currentSearchTerm = term.trim().toLowerCase();
+      const clearBtn = document.getElementById('clearSearchBtn');
+      if (clearBtn) {
+        if (currentSearchTerm.length > 0) {
+          clearBtn.classList.remove('hidden');
+        } else {
+          clearBtn.classList.add('hidden');
+        }
+      }
+      renderStoreProducts();
+    }
+
+    function clearSearch() {
+      const input = document.getElementById('productSearchInput');
+      if (input) input.value = '';
+      currentSearchTerm = '';
+      const clearBtn = document.getElementById('clearSearchBtn');
+      if (clearBtn) clearBtn.classList.add('hidden');
+      renderStoreProducts();
+    }
+
+    // Filter products logic
+    function getFilteredProducts() {
+      return storeProducts.filter(p => {
+        // Category check
+        let matchCat = true;
+        if (currentCategoryFilter === 'qushlar') {
+          matchCat = (p.category && (p.category.toLowerCase().includes('qush') || p.category.toLowerCase().includes('kanare') || p.category.toLowerCase().includes('amadin') || p.category.toLowerCase().includes('kokil') || p.category.toLowerCase().includes('to\'ti')));
+        } else if (currentCategoryFilter === 'kaptar') {
+          matchCat = (p.category && p.category.toLowerCase().includes('kaptar')) || p.name.toLowerCase().includes('kaptar') || p.name.toLowerCase().includes('suli');
+        } else if (currentCategoryFilter === 'parranda') {
+          matchCat = (p.category && (p.category.toLowerCase().includes('parranda') || p.category.toLowerCase().includes('bedana') || p.category.toLowerCase().includes('tuxum')));
+        } else if (currentCategoryFilter === 'don') {
+          matchCat = (p.category && (p.category.toLowerCase().includes('don') || p.category.toLowerCase().includes('yorma'))) || (p.tag && p.tag.toLowerCase().includes('don'));
+        }
+
+        // Search check
+        let matchSearch = true;
+        if (currentSearchTerm) {
+          const searchIn = `${p.name} ${p.category} ${p.description || ''} ${p.composition || ''}`.toLowerCase();
+          matchSearch = searchIn.includes(currentSearchTerm);
+        }
+
+        return matchCat && matchSearch;
+      });
+    }
+
+    // Mahsulotlar kartalarini dinamik render qilish
     function renderStoreProducts() {
       const container = document.getElementById('productsGridContainer');
+      const emptyNotice = document.getElementById('noProductsFoundNotice');
       if (!container) return;
 
-      container.innerHTML = storeProducts.map(p => `
-        <div class="product-card group bg-white rounded-3xl overflow-hidden border border-stone-200/80 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+      const filtered = getFilteredProducts();
+
+      if (filtered.length === 0) {
+        container.innerHTML = '';
+        if (emptyNotice) emptyNotice.classList.remove('hidden');
+        return;
+      }
+
+      if (emptyNotice) emptyNotice.classList.add('hidden');
+
+      container.innerHTML = filtered.map(p => {
+        const safeName = p.name.replace(/'/g, "\\'");
+        const safeUnit = (p.unit || '1 kg').replace(/'/g, "\\'");
+        const safeImage = (p.image || '').replace(/'/g, "\\'");
+
+        return `
+        <div class="product-card group bg-white rounded-3xl overflow-hidden border border-stone-200/80 shadow-xs hover:shadow-card-hover hover:border-brand-300 transition-all duration-300 flex flex-col justify-between">
           <div>
+            <!-- Image with Zoom & Badges -->
             <div class="relative h-52 overflow-hidden bg-stone-100">
-              <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?auto=format&fit=crop&w=600&q=80'">
+              <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500" onerror="this.src='https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?auto=format&fit=crop&w=600&q=80'">
+              
+              <!-- Tag badge -->
               ${p.tag ? `
-                <span class="absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-bold bg-amber-500 text-white shadow-sm">
+                <span class="absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-black bg-amberBrand-500 text-white shadow-sm">
                   ${p.tag}
                 </span>
               ` : ''}
+
+              <!-- Quick View overlay button -->
+              <button onclick="openQuickView('${p.id}')" class="absolute inset-0 bg-stone-900/40 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-white font-bold text-xs">
+                <span class="px-3 py-1.5 rounded-xl bg-white/90 text-stone-900 shadow-md flex items-center gap-1.5 hover:bg-white">
+                  <i class="fa-solid fa-eye text-brand-700"></i> Tezkor ko'rish
+                </span>
+              </button>
             </div>
+
+            <!-- Content Area -->
             <div class="p-5 space-y-3">
               <div class="flex items-center justify-between text-xs font-semibold text-stone-500">
-                <span>${p.category || 'Parrandalar uchun'}</span>
-                <span class="text-brand-700 bg-brand-50 px-2.5 py-0.5 rounded-md font-bold">${p.unit || '1 kg'}</span>
+                <span class="truncate max-w-[170px]">${p.category || 'Parrandalar uchun'}</span>
+                <span class="text-brand-800 bg-brand-50 border border-brand-200/60 px-2.5 py-0.5 rounded-md font-extrabold text-[11px]">${p.unit || '1 kg'}</span>
               </div>
-              <h3 class="font-extrabold text-stone-900 text-base group-hover:text-brand-600 transition-colors line-clamp-2">
+              
+              <h3 class="font-extrabold text-stone-900 text-base group-hover:text-brand-700 transition-colors line-clamp-2 leading-snug cursor-pointer" onclick="openQuickView('${p.id}')">
                 ${p.name}
               </h3>
+
               <p class="text-xs text-stone-500 line-clamp-2">
                 ${p.description || ''}
               </p>
 
-              <!-- Mahsulot tarkibi (Nimadan tashkil topganligi) -->
-              <div class="p-3 rounded-2xl bg-amber-50/70 border border-amber-200/60 text-xs text-amber-950 space-y-1">
-                <div class="flex items-center gap-1.5 font-bold text-[11px] text-amber-800">
+              <!-- Mahsulot tarkibi -->
+              <div class="p-3 rounded-2xl bg-amberBrand-50/70 border border-amberBrand-200/60 text-xs text-amberBrand-950 space-y-1">
+                <div class="flex items-center gap-1.5 font-bold text-[11px] text-amberBrand-800">
                   <i class="fa-solid fa-wheat-awn"></i>
                   <span>Tarkibi:</span>
                 </div>
-                <p class="text-[11px] leading-relaxed text-amber-900/90 font-medium">
+                <p class="text-[11px] leading-relaxed text-stone-700 font-medium line-clamp-2">
                   ${p.composition || "100% tabiiy va tozalangan sara donlar"}
                 </p>
               </div>
             </div>
           </div>
+
+          <!-- Card Footer & Cart Action -->
           <div class="p-5 pt-0">
             <div class="flex items-baseline justify-between mb-4 pt-3 border-t border-stone-100">
               <span class="text-xs text-stone-400 font-medium">Narxi:</span>
               <span class="text-xl font-black text-brand-700">${formatPrice(p.price)} <span class="text-xs font-semibold text-stone-500">/ ${p.unit || '1 kg'}</span></span>
             </div>
-            <button onclick="handleAddToCart(this, '${p.id}', '${p.name.replace(/'/g, "\\'")}', ${p.price}, '${p.unit || '1 kg'}', '${p.image}')" class="w-full py-3 rounded-xl bg-brand-600 hover:bg-brand-700 active:scale-95 text-white font-bold text-sm shadow-md shadow-brand-600/20 transition-all flex items-center justify-center gap-2">
+            
+            <button onclick="handleAddToCart(this, '${p.id}', '${safeName}', ${p.price}, '${safeUnit}', '${safeImage}')" class="w-full py-3.5 rounded-2xl bg-brand-600 hover:bg-brand-700 active:scale-95 text-white font-extrabold text-sm shadow-md shadow-brand-600/20 hover:shadow-glow-emerald transition-all flex items-center justify-center gap-2">
               <i class="fa-solid fa-cart-plus"></i>
               <span>Savatchaga qo'shish</span>
             </button>
           </div>
         </div>
-      `).join('');
+      `;
+      }).join('');
+    }
+
+    // --- QUICK VIEW MODAL LOGIC ---
+    function openQuickView(productId) {
+      const p = storeProducts.find(item => item.id === productId);
+      if (!p) return;
+
+      document.getElementById('qvImage').src = p.image || '';
+      document.getElementById('qvCategory').textContent = p.category || 'Parrandalar uchun';
+      document.getElementById('qvTag').textContent = p.tag || 'Sara don';
+      document.getElementById('qvName').textContent = p.name;
+      document.getElementById('qvDescription').textContent = p.description || "Qushlaringiz uchun yuqori sifatli va tozalangan tabiiy ozuqa.";
+      document.getElementById('qvComposition').textContent = p.composition || "100% tabiiy va tozalangan sara donlar";
+      document.getElementById('qvPrice').textContent = `${formatPrice(p.price)} / ${p.unit || '1 kg'}`;
+
+      const addBtn = document.getElementById('qvAddToCartBtn');
+      addBtn.onclick = () => {
+        addToCart({
+          id: p.id,
+          name: p.name,
+          price: p.price,
+          unit: p.unit || '1 kg',
+          image: p.image
+        });
+        closeQuickViewModal();
+      };
+
+      const modal = document.getElementById('quickViewModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeQuickViewModal() {
+      const modal = document.getElementById('quickViewModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    // --- FAQ ACCORDION LOGIC ---
+    function toggleFaq(index) {
+      const content = document.getElementById(`faqContent-${index}`);
+      const icon = document.getElementById(`faqIcon-${index}`);
+      if (!content || !icon) return;
+
+      const isHidden = content.classList.contains('hidden');
+      if (isHidden) {
+        content.classList.remove('hidden');
+        icon.classList.add('rotate-180');
+      } else {
+        content.classList.add('hidden');
+        icon.classList.remove('rotate-180');
+      }
     }
 
 
     // --- CART STATE ---
-    // Cart item format: { id, name, price, unit, image, quantity }
     let cart = [];
 
     // Load cart from LocalStorage on page load
@@ -989,7 +1505,7 @@
 
     // Format number to Uzbek so'm (e.g. 26 000)
     function formatPrice(number) {
-      return number.toLocaleString('ru-RU') + " so'm";
+      return Number(number).toLocaleString('ru-RU') + " so'm";
     }
 
     // Render all cart elements in DOM
@@ -1007,7 +1523,7 @@
         if (badge) {
           badge.textContent = totalCount;
           badge.classList.remove('badge-bounce');
-          void badge.offsetWidth; // trigger reflow
+          void badge.offsetWidth;
           badge.classList.add('badge-bounce');
         }
       });
@@ -1191,12 +1707,23 @@
         addressInput.placeholder = "Shahar, tuman, ko'cha, uy raqami va mo'ljal...";
         addressInput.required = true;
       } else {
-        pickupCard.className = "cursor-pointer border-2 border-amber-500 bg-amber-50/70 p-3.5 rounded-2xl flex items-center gap-3 transition-all shadow-xs";
+        pickupCard.className = "cursor-pointer border-2 border-amberBrand-500 bg-amberBrand-50/70 p-3.5 rounded-2xl flex items-center gap-3 transition-all shadow-xs";
         courierCard.className = "cursor-pointer border-2 border-stone-200 bg-stone-50 p-3.5 rounded-2xl flex items-center gap-3 transition-all hover:border-stone-300";
         pickupBox.classList.remove('hidden');
         addressLabel.innerHTML = 'Qo\'shimcha izoh yoki qachon olib ketasiz? <span class="text-stone-400 font-normal">(ixtiyoriy)</span>';
         addressInput.placeholder = "Masalan: Ertaga soat 14:00 da o'zim borib olib ketaman...";
         addressInput.required = false;
+      }
+    }
+
+    // Trigger Confetti Celebration
+    function triggerOrderConfetti() {
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 120,
+          spread: 80,
+          origin: { y: 0.6 }
+        });
       }
     }
 
@@ -1300,13 +1827,16 @@
         }
       }
 
+      // Confetti celebration!
+      triggerOrderConfetti();
+
       // Update Modal Message according to Telegram status
       const modalMsgEl = document.getElementById('modalMessage');
       if (modalMsgEl) {
         if (telegramDelivered) {
           modalMsgEl.innerHTML = `Rahmat! Buyurtmangiz qabul qilindi va <b>Telegram botingizga yetkazildi</b>. Menejerimiz tez orada siz bilan bog'lanadi.`;
         } else {
-          modalMsgEl.innerHTML = `Buyurtmangiz tizimda qayd etildi.<div class="mt-2.5 text-xs p-3 rounded-2xl bg-amber-50 text-amber-800 border border-amber-200/80 text-left"><b>⚠️ Telegram holati:</b> ${telegramNotice || "Xabar yuborilmadi"}.<br><span class="text-[11px] text-amber-700">Botga kirib <code>/start</code> bosganingizni tekshiring.</span></div>`;
+          modalMsgEl.innerHTML = `Buyurtmangiz tizimda qayd etildi.<div class="mt-2.5 text-xs p-3 rounded-2xl bg-amberBrand-50 text-amberBrand-800 border border-amberBrand-200/80 text-left"><b>⚠️ Telegram holati:</b> ${telegramNotice || "Xabar yuborilmadi"}.<br><span class="text-[11px] text-amberBrand-700">Botga kirib <code>/start</code> bosganingizni tekshiring.</span></div>`;
         }
       }
 
@@ -1321,7 +1851,7 @@
         ${address !== "Kiritilmagan" ? `<p><strong>Manzil / Izoh:</strong> ${address}</p>` : ''}
         <p class="pt-1.5 border-t border-stone-200/80 flex items-center justify-between">
           <span class="text-stone-400 font-semibold">Telegram Bot:</span>
-          <span class="font-bold ${telegramDelivered ? 'text-green-600' : 'text-amber-600'}">
+          <span class="font-bold ${telegramDelivered ? 'text-green-600' : 'text-amberBrand-600'}">
             ${telegramDelivered ? '✅ Xabar yetkazildi' : '⚠️ ' + (telegramNotice || 'Yetkazilmadi')}
           </span>
         </p>
@@ -1360,7 +1890,7 @@
 
       // Reset form and cart
       document.getElementById('orderForm').reset();
-      handleFulfillmentChange("Yetkazib berish"); // Reset to default fulfillment
+      handleFulfillmentChange("Yetkazib berish");
       cart = [];
       saveCart();
 
@@ -1375,7 +1905,10 @@
     }
 
     // Initialize cart on load
-    document.addEventListener('DOMContentLoaded', () => { initCart(); loadStoreProducts(); });
+    document.addEventListener('DOMContentLoaded', () => { 
+      initCart(); 
+      loadStoreProducts(); 
+    });
   </script>
 
 </body>

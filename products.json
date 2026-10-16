@@ -2,7 +2,7 @@
   {
     "id": "prod-1",
     "name": "Kanareka uchun maxsus sayrash ozuqasi",
-    "price": 26000,
+    "price": 38000,
     "unit": "1 kg",
     "image": "images/kanareka-don.jpg",
     "tag": "Premium",
@@ -13,7 +13,7 @@
   {
     "id": "prod-2",
     "name": "Amadinka qushlari uchun elangan don",
-    "price": 22000,
+    "price": 12000,
     "unit": "1 kg",
     "image": "images/amadinka-don.jpg",
     "tag": "Tozalangan",
@@ -23,13 +23,13 @@
   },
   {
     "id": "prod-3",
-    "name": "Kokil qushlari uchun mevali don aralashmasi",
-    "price": 34000,
+    "name": "Kokil qushlari uchun  don aralashmasi",
+    "price": 120000,
     "unit": "1 kg",
     "image": "images/kokil-don.jpg",
     "tag": "Mevali",
     "category": "Kokil va To'tilar",
-    "description": "Pista, yer yong'oq, suli va quritilgan mevalar bilan boyitilgan to'yimli kokil ozuqasi.",
+    "description": "Urug‘larning ulkan xilma-xilligi: 15 dan ortiq turli xil urug‘lar.\nTurli xil o‘t urug‘larini o‘z ichiga oladi: yumshoq o‘t (cocksfoot/orchard grass) va timofeyka (timothy grass) urug‘lari.\nQobig‘i tozalangan kungaboqar urug‘lari hamda kungaboqar mikrourug‘lari (MICRO) mavjud.\n(kokil ,sava, chij,repl,va karalok ) qushlari uchun ayni muddao.",
     "composition": "Kungaboqar pistasi (25%), Tozalangan suli (20%), Sariq/oq tariq (25%), Quritilgan mevalar (15%), Yong'oq (15%)"
   },
   {
