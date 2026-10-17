@@ -243,7 +243,7 @@ app.post('/api/products', (req, res) => {
 // Export for Vercel Serverless & Start Server
 module.exports = app;
 
-if (!process.env.VERCEL) {
+if (require.main === module) {
   app.listen(PORT, () => {
     console.log(`===============================================`);
     console.log(`🌾 Ozuqa-don serveri ishga tushdi:`);
